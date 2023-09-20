@@ -20,6 +20,10 @@ use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
 
+// Admin
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ContactosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -175,8 +179,7 @@ Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 
-use Illuminate\Support\Facades\DB;
-
+// ADMIN
 Route::get('/testdb', function () {
     try {
         // Intenta ejecutar una consulta de prueba
@@ -186,3 +189,6 @@ Route::get('/testdb', function () {
         return 'Error al conectar con la base de datos: ' . $e->getMessage();
     }
 });
+
+Route::get('cms/contactos', [ContactosController::class, 'lista']);
+Route::post('cms/contactos/datatable', [ContactosController::class, 'datatable']);
