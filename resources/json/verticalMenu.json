@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "url": "javascript:void(0)",
+      "url": "/",
       "name": "Dashboard",
       "i18n": "Dashboard",
       "class": "waves-effect waves-cyan",
@@ -9,12 +9,12 @@
       "icon": "dashboard"
     },
     {
-      "url": "app-contacts",
+      "url": "cms/contactos",
       "name": "Contacts",
       "i18n": "Contacts",
       "class": "waves-effect waves-cyan",
       "icon": "person_outline",
-      "slug": "app-contacts"
+      "slug": "cms/contactos"
     },
     {
       "url": "app-invoice-list",
