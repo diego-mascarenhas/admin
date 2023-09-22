@@ -190,5 +190,9 @@ Route::get('/testdb', function () {
     }
 });
 
-Route::get('/cms/contactos', [ContactosController::class, 'lista']);
+Route::get('/cms/contactos', [ContactosController::class, 'index']);
 Route::post('/cms/contactos/datatable', [ContactosController::class, 'datatable']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

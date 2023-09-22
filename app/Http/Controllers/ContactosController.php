@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class ContactosController extends Controller
 {
-    public function lista()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
     {
         //return view('contactos.index');
 
