@@ -8,6 +8,9 @@
 <script src="{{asset('js/plugins.js')}}"></script>
 <script src="{{asset('js/search.js')}}"></script>
 <script src="{{asset('js/custom/custom-script.js')}}"></script>
+@if ($configData['isCustomizer']=== true)
+<script src="{{asset('js/scripts/customizer.js')}}"></script>
+@endif
 <!-- END THEME  JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 @yield('page-script')

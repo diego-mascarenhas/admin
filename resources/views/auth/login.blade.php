@@ -22,10 +22,10 @@
       </div>
       <div class="row margin">
         <div class="input-field col s12">
-          <i class="material-icons prefix pt-2">person_outline</i>
+          <i class="material-icons prefix pt-2">mail_outline</i>
           <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email"
             value="{{ old('email') }}"  autocomplete="email" autofocus>
-          <label for="email" class="center-align">{{ __('Username') }}</label>
+          <label for="email" class="center-align">{{ __('locale.Email') }}</label>
           @error('email')
           <small class="red-text ml-7" >
             {{ $message }}
@@ -38,7 +38,7 @@
           <i class="material-icons prefix pt-2">lock_outline</i>
           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
             name="password"  autocomplete="current-password">
-          <label for="password">{{ __('password') }}</label>
+          <label for="password">{{ __('locale.Password') }}</label>
           @error('password')
           <small class="red-text ml-7" >
             {{ $message }}
@@ -51,7 +51,7 @@
           <p>
             <label>
               <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-              <span>Remember Me</span>
+              <span>{{ __('locale.Remember Me') }}</span>
             </label>
           </p>
         </div>
@@ -59,17 +59,17 @@
       <div class="row">
         <div class="input-field col s12">
           <button type="submit" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
-            Login
+            {{ __('locale.Login') }}
           </button>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6 m6 l6">
-          <p class="margin medium-small"><a href="{{ route('register') }}">Register Now!</a></p>
+          <p class="margin medium-small"><a href="{{ route('register') }}">{{ __('locale.Register Now!') }}</a></p>
         </div>
         <div class="input-field col s6 m6 l6">
           <p class="margin right-align medium-small">
-            <a href="{{ route('password.request') }}">Forgot password?</a>
+            <a href="{{ route('password.request') }}">{{ __('locale.Forgot password?') }}</a>
           </p>
         </div>
       </div>
