@@ -5,7 +5,7 @@
       <div class="header-search-wrapper hide-on-med-and-down">
         <i class="material-icons">search</i>
         <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize"
-          data-search="starter-kit-list">
+          data-search="template-list">
         <ul class="search-list collection display-none"></ul>
       </div>
       <ul class="navbar-list right">
@@ -123,26 +123,26 @@
       <!-- profile-dropdown-->
       <ul class="dropdown-content" id="profile-dropdown">
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('user-profile-page')}}">
             <i class="material-icons">person_outline</i>
             Profile
           </a>
         </li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('app-chat')}}">
             <i class="material-icons">chat_bubble_outline</i>
             Chat
           </a>
         </li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('page-faq')}}">
             <i class="material-icons">help_outline</i>
             Help
           </a>
         </li>
         <li class="divider"></li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('user-lock-screen')}}">
             <i class="material-icons">lock_outline</i>
             Lock
           </a>
@@ -164,7 +164,7 @@
         <form id="navbarForm">
           <div class="input-field search-input-sm">
             <input class="search-box-sm mb-0" type="search" required="" placeholder='Explore Materialize' id="search"
-              data-search="starter-kit-list">
+              data-search="template-list">
             <label class="label-icon" for="search">
               <i class="material-icons search-sm-icon">search</i>
             </label>

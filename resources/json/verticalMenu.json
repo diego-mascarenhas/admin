@@ -9,20 +9,12 @@
       "icon": "dashboard"
     },
     {
-      "url": "cms/contactos",
+      "url": "contacts",
       "name": "Contacts",
       "i18n": "Contacts",
       "class": "waves-effect waves-cyan",
       "icon": "person_outline",
-      "slug": "cms/contactos"
-    },
-    {
-      "url": "app-invoice-list",
-      "name": "Books",
-      "i18n": "Books",
-      "class": "waves-effect waves-cyan",
-      "icon": "import_contacts",
-      "slug": "app-invoice-list"
+      "slug": "contacts"
     }
   ]
 }

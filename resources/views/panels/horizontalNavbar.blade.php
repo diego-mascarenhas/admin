@@ -21,7 +21,7 @@
       <div class="header-search-wrapper hide-on-med-and-down">
         <i class="material-icons">search</i>
         <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize"
-          data-search="starter-kit-list">
+          data-search="template-list">
         <ul class="search-list collection display-none"></ul>
       </div>
       <ul class="navbar-list right">
@@ -66,7 +66,7 @@
       </ul>
       <!-- translation-button-->
       <ul class="dropdown-content" id="translation-dropdown">
-         <li class="dropdown-item">
+        <li class="dropdown-item">
           <a class="grey-text text-darken-1" href="{{url('lang/es')}}" data-language="es">
             <i class="flag-icon flag-icon-es"></i>
             Español
@@ -142,32 +142,32 @@
       <!-- profile-dropdown-->
       <ul class="dropdown-content" id="profile-dropdown">
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('user-profile-page')}}">
             <i class="material-icons">person_outline</i>
             Profile
           </a>
         </li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('app-chat')}}">
             <i class="material-icons">chat_bubble_outline</i>
             Chat
           </a>
         </li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('page-faq')}}">
             <i class="material-icons">help_outline</i>
             Help
           </a>
         </li>
         <li class="divider"></li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('user-lock-screen')}}">
             <i class="material-icons">lock_outline</i>
             Lock
           </a>
         </li>
         <li>
-          <a class="grey-text text-darken-1" href="#">
+          <a class="grey-text text-darken-1" href="{{asset('user-login')}}">
             <i class="material-icons">keyboard_tab</i>
             Logout
           </a>
@@ -179,9 +179,11 @@
         <form id="navbarForm">
           <div class="input-field search-input-sm">
             <input class="search-box-sm" type="search" required="" placeholder='Explore Materialize' id="search"
-              data-search="starter-kit-list">
-            <label class="label-icon" for="search"><i class="material-icons search-sm-icon">search</i></label><i
-              class="material-icons search-sm-close">close</i>
+              data-search="template-list">
+            <label class="label-icon" for="search">
+              <i class="material-icons search-sm-icon">search</i>
+            </label>
+            <i class="material-icons search-sm-close">close</i>
             <ul class="search-list collection search-list-sm display-none"></ul>
           </div>
         </form>
@@ -202,9 +204,8 @@
             $custom_classes=$menu->class;
             }
             @endphp
-          <li {{(request()->is($menu->url)) ? 'class=active':''}}>
-            <a class="@if(isset($menu->submenu)){{'dropdown-menu'}} @endif" href="{{$menu->url}}"
-              data-target="@if(isset($menu->activate)){{$menu->activate}} @endif">
+          <li>
+            <a @if(isset($menu->submenu)){{'class=dropdown-menu'}} @endif href="{{$menu->url}}" data-target="{{$menu->activate}}">
               <i class="material-icons">{{$menu->icon}}</i>
               <span>
                 <span class="dropdown-title">{{ __('locale.'.$menu->name)}}</span>

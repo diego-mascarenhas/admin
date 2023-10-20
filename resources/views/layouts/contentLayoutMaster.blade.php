@@ -1,12 +1,12 @@
 {{-- pageConfigs variable pass to Helper's updatePageConfig function to update page configuration  --}}
 @isset($pageConfigs)
-{!! Helper::updatePageConfig($pageConfigs) !!}
+  {!! Helper::updatePageConfig($pageConfigs) !!}
 @endisset
 
 <!DOCTYPE html>
 @php
 // confiData variable layoutClasses array in Helper.php file.
-$configData = Helper::applClasses();
+  $configData = Helper::applClasses();
 @endphp
 <!--
 Template Name: Materialize - Material Design Admin Template
@@ -31,9 +31,9 @@ License: You must have a valid license purchased only from themeforest(the above
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>@yield('title') | CMS+</title>
-  <link rel="apple-touch-icon" href="../../images/favicon/apple-touch-icon-152x152.png">
-  <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon/favicon-32x32.png">
+  <title>@yield('title') | Materialize - Material Design Admin Template</title>
+  <link rel="apple-touch-icon" href="{{asset('images/favicon/apple-touch-icon-152x152.png')}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon/favicon-32x32.png')}}">
 
   {{-- Include core + vendor Styles --}}
   @include('panels.styles')
@@ -44,8 +44,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {{-- @isset(config('custom.custom.mainLayoutType'))
 @endisset --}}
 @if(!empty($configData['mainLayoutType']) && isset($configData['mainLayoutType']))
-@include(($configData['mainLayoutType'] === 'horizontal-menu') ? 'layouts.horizontalLayoutMaster':
-'layouts.verticalLayoutMaster')
+  @include(($configData['mainLayoutType'] === 'horizontal-menu') ? 'layouts.horizontalLayoutMaster':'layouts.verticalLayoutMaster')
 @else
 {{-- if mainLaoutType is empty or not set then its print below line  --}}
 <h1>{{'mainLayoutType Option is empty in config custom.php file.'}}</h1>

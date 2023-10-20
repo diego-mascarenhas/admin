@@ -1,8 +1,7 @@
 <?php // Code within app\Helpers\Helper.php
-
 namespace App\Helpers;
-
 use Config;
+use Illuminate\Support\Str;
 
 class Helper
 {
@@ -24,15 +23,15 @@ class Helper
             'isFooterDark' => null,
             'isFooterFixed' => false,
             'templateTitle' => '',
+            'isCustomizer' => true,
             'defaultLanguage'=>'en',
             'largeScreenLogo' => 'images/logo/materialize-logo-color.png',
             'smallScreenLogo' => 'images/logo/materialize-logo.png',
+            'isFabButton'=>false, 
             'direction' => env('MIX_CONTENT_DIRECTION', 'ltr'),
         ];
-
         // if any key missing of array from custom.php file it will be merge and set a default value from dataDefault array and store in data variable
         $data = array_merge($dataDefault, config('custom.custom'));
-
         // all available option of materialize template
         $allOptions = [
             'mainLayoutType' => array('vertical-modern-menu', 'vertical-menu-nav-dark', 'vertical-gradient-menu', 'vertical-dark-menu', 'horizontal-menu'),
@@ -42,13 +41,14 @@ class Helper
             'isNavbarFixed' => array(true, false),
             'isMenuDark' => array(null, true, false),
             'isMenuCollapsed' => array(true, false),
-            'activeMenuType' => array('sidenav-active-rounded'=>'sidenav-active-rounded','sidenav-active-square'=>'sidenav-active-square', 'sidenav-active-fullwidth'=>'sidenav-active-fullwidth'),
+            'activeMenuType' => array('sidenav-active-square'=>'sidenav-active-square', 'sidenav-active-rounded'=>'sidenav-active-rounded', 'sidenav-active-fullwidth'=>'sidenav-active-fullwidth'),
             'isFooterDark' => array(null, true, false),
             'isFooterFixed' => array(false, true),
-            'defaultLanguage'=>array('es'=>'es', 'en'=>'en','fr'=>'fr','de'=>'de','pt'=>'pt'),
-            'direction' => array('ltr', 'rtl'),
+            'isCustomizer' => array(true, false),
+            'isFabButton'=> array(false, true), 
+            'defaultLanguage'=>array('en'=>'en','es'=>'es','fr'=>'fr','de'=>'de','pt'=>'pt'),
+            'direction' => array('ltr'=>'ltr', 'rtl'=>'rtl'),
         ];
-
         //if any options value empty or wrong in custom.php config file then set a default value
         foreach ($allOptions as $key => $value) {
             if (gettype($data[$key]) === gettype($dataDefault[$key])) {
@@ -68,7 +68,6 @@ class Helper
                 }
             }
         }
-
         // if any of template logo is not set or empty is set to default logo
         if (empty($data['largeScreenLogo'])) {
             $data['largeScreenLogo'] = $dataDefault['largeScreenLogo'];
@@ -77,7 +76,6 @@ class Helper
             $data['smallScreenLogo'] = $dataDefault['smallScreenLogo'];
         }
         //mainLayoutTypeClass array contain default class of body element
-
         $mainLayoutTypeClass = [
             'vertical-modern-menu' => 'vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns',
             'vertical-menu-nav-dark' => 'vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns',
@@ -101,7 +99,6 @@ class Helper
             'vertical-dark-menu' => 'sidenav-dark',
             'horizontal-menu' => '',
         ];
-
         //activeMenuTypeClass array contain active menu class of sidenav according to layout types
         $activeMenuTypeClass = [
             'vertical-modern-menu' => 'sidenav-active-square',
@@ -110,7 +107,6 @@ class Helper
             'vertical-dark-menu' => 'sidenav-active-rounded',
             'horizontal-menu' => '',
         ];
-
         //navbarMainClass array contain navbar's default classes
         $navbarMainClass = [
             'vertical-modern-menu' => 'navbar-main navbar-color nav-collapsible no-shadow nav-expanded sideNav-lock',
@@ -127,7 +123,6 @@ class Helper
             'vertical-dark-menu' => 'navbar-light',
             'horizontal-menu' => 'navbar-dark gradient-45deg-light-blue-cyan',
         ];
-
         //navbarLargeColor array contain navbarlarge's default color classes
         $navbarLargeColor = [
             'vertical-modern-menu' => 'gradient-45deg-indigo-purple',
@@ -136,7 +131,6 @@ class Helper
             'vertical-dark-menu' => 'blue-grey lighten-5',
             'horizontal-menu' => 'blue-grey lighten-5',
         ];
-
         //mainFooterClass array contain Footer's default classes
         $mainFooterClass = [
             'vertical-modern-menu' => 'page-footer footer gradient-shadow',
@@ -145,7 +139,6 @@ class Helper
             'vertical-dark-menu' => 'page-footer footer',
             'horizontal-menu' => 'page-footer footer gradient-shadow',
         ];
-
         //mainFooterColor array contain footer's color classes
         $mainFooterColor = [
             'vertical-modern-menu' => 'footer-dark gradient-45deg-indigo-purple',
@@ -154,7 +147,6 @@ class Helper
             'vertical-dark-menu' => 'footer-light',
             'horizontal-menu' => 'footer-dark gradient-45deg-light-blue-cyan',
         ];
-
         //  above arrary override through dynamic data
         $layoutClasses = [
             'mainLayoutType' => $data['mainLayoutType'],
@@ -178,11 +170,13 @@ class Helper
             'isFooterDark' => $data['isFooterDark'],
             'isFooterFixed' => $data['isFooterFixed'],
             'templateTitle' => $data['templateTitle'],
+            'isCustomizer' => $data['isCustomizer'],
             'largeScreenLogo' => $data['largeScreenLogo'],
             'smallScreenLogo' => $data['smallScreenLogo'],
             'defaultLanguage'=>$allOptions['defaultLanguage'][$data['defaultLanguage']],
             'mainFooterClass' => $mainFooterClass[$data['mainLayoutType']],
             'mainFooterColor' => $mainFooterColor[$data['mainLayoutType']],
+            'isFabButton'=>$data['isFabButton'],
             'direction' => $data['direction'],
         ];
          // set default language if session hasn't locale value the set default language
@@ -195,10 +189,11 @@ class Helper
     public static function updatePageConfig($pageConfigs)
     {
         $demo = 'custom';
+        $custom = 'custom';
         if (isset($pageConfigs)) {
             if (count($pageConfigs) > 0) {
                 foreach ($pageConfigs as $config => $val) {
-                    Config::set('custom.' . $demo . '.' . $config, $val);
+                    Config::set($demo . '.' . $custom . '.' . $config, $val);
                 }
             }
         }

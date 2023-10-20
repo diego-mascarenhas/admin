@@ -16,16 +16,16 @@
   <div id="main">
     <div class="row">
       @if ($configData["navbarLarge"] === true)
-      @if(($configData["mainLayoutType"]) === 'vertical-modern-menu')
-      {{-- navabar large  --}}
-      <div
-        class="content-wrapper-before @if(!empty($configData['navbarBgColor'])) {{$configData['navbarBgColor']}} @else {{$configData["navbarLargeColor"]}} @endif">
-      </div>
-      @else
-      {{-- navabar large  --}}
-      <div class="content-wrapper-before {{$configData["navbarLargeColor"]}}">
-      </div>
-      @endif
+        @if(($configData["mainLayoutType"]) === 'vertical-modern-menu')
+        {{-- navabar large  --}}
+        <div
+          class="content-wrapper-before @if(!empty($configData['navbarBgColor'])) {{$configData['navbarBgColor']}} @else {{$configData["navbarLargeColor"]}} @endif">
+        </div>
+        @else
+        {{-- navabar large  --}}
+        <div class="content-wrapper-before {{$configData["navbarLargeColor"]}}">
+        </div>
+        @endif
       @endif
 
 
@@ -39,6 +39,9 @@
           @yield('content')
           {{-- right sidebar --}}
           @include('pages.sidebar.right-sidebar')
+          @if($configData["isFabButton"] === true)
+            @include('pages.sidebar.fab-menu')
+          @endif
         </div>
         {{-- overlay --}}
         <div class="content-overlay"></div>
@@ -46,6 +49,15 @@
     </div>
   </div>
   <!-- END: Page Main-->
+
+
+  @if($configData['isCustomizer'] === true)
+  <!-- Theme Customizer -->
+  @include('pages.partials.customizer')
+  <!--/ Theme Customizer -->
+  {{-- buy now button --}}
+  @include('pages.partials.buy-now')
+  @endif
 
 
   {{-- footer  --}}

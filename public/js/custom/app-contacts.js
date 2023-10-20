@@ -1,13 +1,16 @@
-$(document).ready(function () {
+jQuery(function () {
    "use strict";
+
+   var htmlElement = document.querySelector('html');
+   var langValue = htmlElement.getAttribute('lang');
 
    $.ajaxSetup({
       cache: false
    });
 
-   var table = $('#tabla').DataTable({
+   var table = $('#data-table-contact').DataTable({
       "language": {
-         "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+         "url": "/js/datatables/" + langValue + ".json"
       },
       "processing": true,
       "serverSide": true,
@@ -15,14 +18,13 @@ $(document).ready(function () {
       "order": [[1, "asc"]],
       "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
       "ajax": {
-         "url": "/cms/contactos/datatable",
+         "url": "/contacts/datatable",
          "type": "POST"
       },
       "columns": [
          { "data": "id", "searchable": false, visible: false },
-         { "data": "nombre" },
-         { "data": "apellido" },
-         { "data": "telefono", "orderable": false, "className": "dt-center" },
+         { "data": "name" },
+         { "data": "phone", "orderable": false, "className": "dt-center" },
          {
             "data": "email", "render": function (data, type, row, meta) {
                if (data) {
@@ -34,31 +36,52 @@ $(document).ready(function () {
             "defaultContent": ''
          },
          {
-            "data": "id_perfil", "orderable": false, "searchable": false, "className": "dt-center",
+            "data": "email_verified_at", "orderable": false, "searchable": false,
             "render": function (data, type, row, meta) {
-               switch (data) {
-                  case "2":
-                     return '<span class="chip lighten-5 blue blue-text">Administrador</span>';
-                  case "3":
-                     return '<span class="chip lighten-5 green green-text">Cliente</span>';
-                  default:
-                     return '<span class="chip lighten-5 grey grey-text">Desconocido</span>';
+               if (data === null) {
+                  return '';
+               } else {
+                  return moment(data).format('LL');
                }
             }
-         }
+         },
+         {
+            data: null, "orderable": false, "className": "dt-center",
+            render: function(data, type, row) {
+                return '<i class="material-icons edit-icon mr-4">edit</i>' +
+                       '<i class="material-icons delete-icon mr-4">delete_outline</i>';
+            }
+        }
       ],
       "initComplete": function () {
          $("#global_filter").on("keyup", function () {
-            $('#tabla').DataTable().search(this.value).draw();
+            $('#data-table-contact').DataTable().search(this.value).draw();
          });
-      }
+      },
+      // "createdRow": function (row, data, dataIndex) {
+      //    $(row).addClass('open-contact-form-button');
+      // }
    });
 
-   // table.on('draw.dt', function () {
-   //    var info = table.page.info();
-   //    $('#total_registros').text(info.recordsTotal);
-   //    $('#tabla_filter').detach().appendTo('#searchContainer');
+
+   // $('table').on('click', '.open-contact-form-button', function () {
+   //    console.log("Clic en la celda");
+   //    $('.contact-sidebar-trigger').click();
    // });
+
+   $('#data-table-contact tbody').on('click', '.edit-icon', function () {
+      var rowData = table.row($(this).closest('tr')).data();
+      $('.contact-sidebar-trigger').click();
+      console.log('Editando el ID:', rowData.id);
+      //$('#name').attr('placeholder', '');
+      $('#name').val(rowData.id);
+    });
+
+   table.on('draw.dt', function () {
+      var info = table.page.info();
+      $('#total_registros').text(info.recordsTotal);
+      $('#tabla_filter').detach().appendTo('#searchContainer');
+   });
 
    // Custom search
    function filterGlobal() {
@@ -158,22 +181,19 @@ $(document).ready(function () {
       contactComposeSidebar.removeClass("show");
    });
 
-   $(".dataTables_scrollBody tr").on("click", function () {
-      updatecontact.removeClass("display-none");
-      addcontact.addClass("display-none");
-      contactOverlay.addClass("show");
-      contactComposeSidebar.addClass("show");
-      $("#first_name").val("Paul");
-      $("#last_name").val("Rees");
-      $("#company").val("Acme Corporation");
-      $("#business").val("Software Developer");
-      $("#email").val("paul.rees@domain.com");
-      $("#phone").val("+1-202-555-0112");
-      $("#notes").val("Do not disturb during work."); 0.2
-      labelEditForm.addClass("active");
-   }).on("click", ".checkbox-label,.favorite,.delete", function (e) {
-      e.stopPropagation();
-   })
+   // $(".dataTables_scrollBody tr").on("click", function () {
+   //    updatecontact.removeClass("display-none");
+   //    addcontact.addClass("display-none");
+   //    contactOverlay.addClass("show");
+   //    contactComposeSidebar.addClass("show");
+   //    $("#name").val("Paul");
+   //    $("#lastname").val("Rees");
+   //    $("#email").val("paul.rees@domain.com");
+   //    $("#phone").val("+1-202-555-0112");
+   //    labelEditForm.addClass("active");
+   // }).on("click", ".checkbox-label,.favorite,.delete", function (e) {
+   //    e.stopPropagation();
+   // })
 
    if (contactComposeSidebar.length > 0) {
       var ps_compose_sidebar = new PerfectScrollbar(".contact-compose-sidebar", {
@@ -196,14 +216,30 @@ $(document).ready(function () {
       });
    }
 
+   // Captura el evento de clic en el botón
+   $('.add-contact').on('click', function (event) {
+      event.preventDefault();
 
-
-
-   
+      $.ajax({
+         type: 'POST',
+         url: '/contacts',
+         data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            name: $('#name').val(),
+            lastname: $('#lastname').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+         },
+         success: function (data) {
+            console.log('Contacto agregado con éxito.');
+            console.log(data);
+         },
+         error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+         }
+      });
+   });
 });
-
-
-
 
 // Sidenav
 $(".sidenav-trigger").on("click", function () {

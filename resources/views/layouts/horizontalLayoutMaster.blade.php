@@ -19,8 +19,8 @@
       @endif
 
       @if ($configData["pageHeader"] === true && isset($breadcrumbs))
-      {{-- breadcrumb --}}
-      @include('panels.breadcrumb')
+        {{-- breadcrumb --}}
+        @include('panels.breadcrumb')
       @endif
       <div class="col s12">
         <div class="container">
@@ -28,6 +28,10 @@
           @yield('content')
           {{-- right sidebar  --}}
           @include('pages.sidebar.right-sidebar')
+          
+          @if($configData["isFabButton"] === true)
+            @include('pages.sidebar.fab-menu')
+          @endif
         </div>
         {{-- overlay --}}
         <div class="content-overlay"></div>
@@ -36,6 +40,17 @@
   </div>
 
   <!-- END: Page Main-->
+
+
+  @if($configData['isCustomizer'] === true && isset($configData['isCustomizer']))
+    <!-- Theme Customizer -->
+    @include('pages.partials.customizer')
+    <!--/ Theme Customizer -->
+    {{-- buy now button section --}}
+    @include('pages.partials.buy-now')
+  @endif
+
+
 
   {{-- main footer  --}}
   @include('panels.footer')
