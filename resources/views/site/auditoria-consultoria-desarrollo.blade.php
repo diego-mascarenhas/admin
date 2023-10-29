@@ -48,17 +48,17 @@
 			</div>
 		</div>
 
-		<?php if (isset($sctc)) { ?>
 		<div class="auditoriaConsultoriaDesarrollo-sctc">
 			<div class="container">
 				<div class="sctcCommon">
-					<h4>¡Comenzá tu proyecto hoy!</h4>
-					<p>Contactá un asesor online para comnezar a diagramar tu proyecto.</p>
-					<a href="#" class="button button-medium margin-auto bc-blue-5 margin-t-30">Contactar</a>
+					<h4>¡Comienza tu proyecto hoy!</h4>
+					<p>Contacta un asesor online para comnezar a diagramar tu proyecto.</p>
+					<a href="https://wa.me/34722372858?text=Hola quisiera consultar por" target="_blank"
+						title="Contacta por Whatsapp"
+						class="button button-medium margin-auto bc-blue-5 margin-t-30">Contactar</a>
 				</div>
 			</div>
 		</div>
-		<?php } ?>
 	</section>
 </div>
 

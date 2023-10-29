@@ -19,10 +19,11 @@ use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
-use App\Http\Controllers\HostingController;
-use App\Http\Controllers\CloudController;
-use App\Http\Controllers\EmailerController;
-use App\Http\Controllers\ContratarController;
+
+use App\Http\Controllers\Site\HostingController;
+use App\Http\Controllers\Site\CloudController;
+use App\Http\Controllers\Site\EmailerController;
+use App\Http\Controllers\Site\ContratarController;
 
 /*
 |--------------------------------------------------------------------------

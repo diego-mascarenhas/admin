@@ -83,7 +83,7 @@
 			</ul>
 		</div>
 
-		<div class="simpleClickToCall-planes">
+		<!-- <div class="simpleClickToCall-planes">
 			<h2 class="section-title margin-b-50"><span>Elige tu plan</span></h2>
 
 			<div class="container-fluid">
@@ -98,19 +98,19 @@
 					<?php // } ?>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<?php if (isset($sctc)) { ?>
 		<div class="simpleClickToCall-sctc">
-			<h2 class="section-title margin-b-50"><span>¡Comenzá hoy mismo!</span></h2>
+			<h2 class="section-title margin-b-50"><span>¡Comienza hoy mismo!</span></h2>
 
 			<div class="sctcCommon">
-				<p>Si tenés alguna duda hace click en el botón a continuación<br>para contactarte de manera inmediata
+				<p>Si tienes alguna duda haz click en el botón a continuación<br>para contactarte de manera inmediata
 				</p>
-				<a href="#" class="button button-large margin-auto bc-blue-5 margin-t-30">Click To Call</a>
+				<a href="https://wa.me/34722372858?text=Hola quisiera consultar por" target="_blank"
+					title="Contacta por Whatsapp" class="button button-large margin-auto bc-blue-5 margin-t-30">Click To
+					Call</a>
 			</div>
 		</div>
-		<?php  } ?>
 	</section>
 </div>
 
