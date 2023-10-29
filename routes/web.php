@@ -19,6 +19,9 @@ use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\HostingController;
+use App\Http\Controllers\CloudController;
+use App\Http\Controllers\EmailerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +38,7 @@ Auth::routes(['verify' => true]);
 
 // Dashboard Route
 // Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/dashboard', [DashboardController::class, 'dashboardModern']);
+Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->name('dashboard');
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
 Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
@@ -177,10 +180,10 @@ Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 // site
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/hosting', '/site/hosting')->name('hosting');
-Route::view('/cloud', '/site/cloud')->name('cloud');
+Route::get('/hosting', [HostingController::class, 'index'])->name('hosting');
+Route::get('/cloud', [CloudController::class, 'index'])->name('cloud');
 Route::view('/servidores-dedicados', '/site/servidores-dedicados')->name('servidores-dedicados');
-Route::view('/emailer', '/site/emailer')->name('emailer');
+Route::get('/emailer', [EmailerController::class, 'index'])->name('emailer');
 Route::view('/simple-click-to-call', '/site/simple-click-to-call')->name('simple-click-to-call');
 Route::view('/auditoria-consultoria-desarrollo', '/site/auditoria-consultoria-desarrollo')->name('auditoria-consultoria-desarrollo');
 Route::view('/clientes', '/site/clientes')->name('clientes');

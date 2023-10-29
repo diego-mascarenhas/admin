@@ -85,14 +85,17 @@
 									href="/clientes/">Clientes</a></li>
 							<li class="@if (Route::currentRouteName() === 'contactenos') active @endif"><a
 									href="/contactenos/">Contacto</a></li>
-							@auth
-								<li class="hidden-xs pull-right <?php echo ($page ?? '' ?? '' == 'micuenta') ? 'active' : null; ?>">
+							@guest
+								<li class="hidden-xs pull-right">
 									<a href="{{ route('login') }}" style="float:left;"><i class="fa fa-sign-in margin-r-5"
 											aria-hidden="true"></i> Área de clientes</a>
 								</li>
 							@else
-								<li>&nbsp;</li>
-							@endauth
+							<li class="hidden-xs pull-right">
+									<a href="{{ route('dashboard') }}" style="float:left;"><i class="fa fa-sign-in margin-r-5"
+											aria-hidden="true"></i> Dashboard</a>
+								</li>
+							@endguest
 						</ul>
 					</div>
 				</nav>
