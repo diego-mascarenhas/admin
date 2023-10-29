@@ -45,32 +45,41 @@
 					<?php } ?>
 
 					<?php } else { ?>
-					<form action="" method="post">
+					<form action="{{ route('enviar.email') }}" method="post">
+						@csrf
 						<div class="row">
 							<div class="col-sm-6 form-group">
 								<input type="text" name="nombre" placeholder="Nombre y apellido (*)"
-									value="<?php echo (isset($detalle['nombre'])) ? $detalle['nombre'] : null; ?>"
-									class="form-control">
+									class="form-control" id="nombre" value="{{ old('nombre') }}">
+									@error('nombre')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
 							</div>
 
 							<div class="col-sm-6 form-group">
 								<input type="text" name="empresa" placeholder="Empresa"
-									value="<?php echo (isset($detalle['empresa'])) ? $detalle['empresa'] : null; ?>"
-									class="form-control">
+									class="form-control" id="empresa" value="{{ old('empresa') }}">
+									@error('empresa')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-sm-6 form-group">
 								<input type="email" name="email" placeholder="Email (*)"
-									value="<?php echo (isset($detalle['email'])) ? $detalle['email'] : null; ?>"
-									class="form-control">
+									class="form-control" id="email" value="{{ old('email') }}">
+									@error('email')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
 							</div>
 
 							<div class="col-sm-6 form-group">
 								<input type="text" name="telefono" placeholder="Teléfono"
-									value="<?php echo (isset($detalle['telefono'])) ? $detalle['telefono'] : null; ?>"
-									class="form-control">
+									class="form-control" id="telefono" value="{{ old('telefono') }}">
+									@error('telefono')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
 							</div>
 						</div>
 

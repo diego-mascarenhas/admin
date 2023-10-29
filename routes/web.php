@@ -24,6 +24,7 @@ use App\Http\Controllers\Site\HostingController;
 use App\Http\Controllers\Site\CloudController;
 use App\Http\Controllers\Site\EmailerController;
 use App\Http\Controllers\Site\ContratarController;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -193,6 +194,10 @@ Route::view('/el-datacenter', '/site/el-datacenter');
 Route::view('/sla', '/site/sla');
 
 Route::get('/contratar/{id}', [ContratarController::class, 'show'])->name('contratar');
+
+Route::post('/enviar-email', [EmailController::class, 'enviarEmail'])->name('enviar.email');
+
+
 
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('guest');
