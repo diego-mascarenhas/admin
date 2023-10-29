@@ -1,0 +1,117 @@
+#menu { background-color: #EE3F3F !important;}
+
+#header .content-logo { background: none;}
+.potenciamos { margin-left: 200px;}
+.navbar { margin-bottom: 0px;}
+ul.navbar-nav { padding: 1px 0; margin: 0;list-style: none; width: 100%;}
+.navbar-nav li {list-style: none; float:left;}
+.navbar-nav li:last-child {list-style: none; float:right;}
+.navbar-nav li a { display: block; font-family: 'proxima-sb'; font-size: 16px; color: white; padding: 21px 25px 19px 25px; text-transform: uppercase; }
+div#navbarSupportedContent.collapse.navbar-collapse { padding: 0;}
+.navbar-nav li a:hover, .navbar-nav li a.active { background-color: white; color: #EE3F3F; }
+
+.dropdown-menu { box-sizing: border-box; border-radius:0; top:61px; }
+.dropdown-menu ul {padding: 0; margin: 0; list-style: none; background-color: white; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+.dropdown-menu li { border-bottom: 1px solid lightgrey; width:100%;}
+.dropdown-menu li:last-child { border-bottom: 0;}
+.dropdown-menu li a { display: block; font-family: 'proxima-sb'; font-size: 16px; color: grey; padding: 15px 25px 15px 15px; text-transform: uppercase; line-height: 1.2; }
+.dropdown-menu>.active>a  { background: #fff !important; color: grey;}
+.dropdown-menu>.active>a:hover  { color: #EE3F3F;}
+
+button.navbar-toggler { float: right !important; width: 41px; border:1px solid #EE3F3F !important; padding: 6px 9px; background-color: transparent; border-radius: 4px;margin-top: 14px; margin-right:20px; margin-bottom: 25px;}
+.navbar-toggle .icon-bar { display: block; width: 22px; height: 2px; border-radius: 1px; }
+button.navbar-toggler span { float: left; width: 21px; background: #EE3F3F; height: 2px; margin:2px 0 2px;}
+a .sub { font-family: 'proxima-l';font-size: 14px; text-transform: none; margin-left: 17px; }
+a:hover .sub { color: grey; }
+.menu-top { width: 100%; border-bottom: 1px solid #ddd; height: 41px;line-height: 40px;font-size: 15px;position: fixed;background: #fff;z-index: 100;top: 0; }
+.menu-top .dropdown { padding-left: 20px; } 
+.menu-top #login-top { padding-right: 20px; } 
+.menu-top i { color: #EE3F3F; } 
+.menu-top a:hover { color: #EE3F3F; } 
+.imagen-home { background: url('../img/cabeceras/revision-alpha-cloud-sm.jpg') center center no-repeat; width:100%; min-height:270px; height:auto; background-size: cover; padding:25px 20px 0px 20px; text-align: center; margin-bottom:38px;}
+.imagen-home h2 { margin-top:77px; margin-bottom:0;color: #fff; font-family: 'proxima-r';font-size: 34px; line-height:34px; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); }
+.imagen-home p {color: #fff; font-family: 'proxima-r';font-size: 18px; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); }
+#home .home-alianzas ul { margin: 0;margin-top: 20px;padding: 0;}
+#home .home-alianzas ul li { display: inline-block; margin: 20px 0 0 20px; }
+.margin-b-80 { margin-bottom: 40px !important;} /* CHEQUEAR PARA PISAR */
+.subheader-banner h1 { margin: 0;font-family: 'proxima-r';font-size: 45px;padding-top: 60px;text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); }
+.tabla-planes { width:70%; margin:0 15%; }
+.tabla-planes thead { background: #EE3F3F; }
+.tabla-planes thead td { padding:10px 0; color:#fff; text-align: center; font-size: 16px; font-family: 'proxima-sb';}
+.tabla-planes thead td.radius-left { border-top-left-radius:4px; }
+.tabla-planes thead td.radius-right { border-top-right-radius:4px; }
+.tabla-planes tbody td { border:1px solid #ebebeb; text-align: center; padding:10px 0;}
+.tabla-planes tbody td .button.button-tiny { margin: 0 auto 5px; }
+.border-bottom-0 { border-bottom:none !important;}
+.menu-user-logueado { margin-top:0 !important;}
+
+/* Medias */
+@media (min-width:761px){
+	button.navbar-toggler { display: none;}
+}
+
+@media (max-width:992px){
+	.navbar-nav li a { padding: 21px 15px 19px 15px !important;}
+	header.container, #menu .container, .sticky-footer .container { width:100% !important;}
+	#home .home-principal .row .col { border-right:0;}
+	.footer-info { margin-bottom: 25px;}
+}
+
+@media (max-width:760px){
+.navbar-nav li {list-style: none; float:left; width: 100%; border-top: 1px solid #ddd;}
+.navbar-nav li:last-child {list-style: none; float:right; padding: 0; margin-left: 0; color:grey;}
+.navbar-nav li a { display: block; font-family: 'proxima-sb'; font-size: 16px; color: grey; padding: 21px 25px 19px 25px; text-transform: uppercase; }
+div#navbarSupportedContent.collapse.navbar-collapse { padding: 0;}
+.navbar-nav li a:hover, .navbar-nav li a.active { background-color: white; color: #EE3F3F; }
+a .sub { margin-left: 15px; }
+
+.dropdown-menu li, .dropdown-menu li:last-child { border-top: none;  border-bottom: 1px solid #fff; width:90% !important; margin-left:10%;}
+.dropdown-menu li:last-child { border-bottom: 0;}
+.dropdown-menu li a { padding: 10px 5px 10px 5px; }
+.navbar-nav .open .dropdown-menu>li>a { padding-left:0px;font-size: 14px; padding-top: 8px !important; padding-bottom: 8px !important; color:grey; }
+.navbar-nav .open .dropdown-menu>li>a:hover { color: #EE3F3F; background: #fff !important; }
+.navbar-collapse { margin-left: -10px;float:left;width: 100%; box-shadow:none;}
+ .navbar-collapse.in { padding-top: 0; width: 100%; margin-left: 5px !important;float:left; border-top: 0 !important; box-shadow:none;}
+.navbar-collapse.in ul { width: 100%; float:left; }
+.navbar-collapse ul, .navbar-collapse li, .navbar-collapse.in ul, .navbar-collapse.in li { width: 100%; float:left;}
+#header, #header .container { padding:0;} 
+#menu { background-color: transparent !important; margin-top:34px; border-bottom:1px solid #ddd; }
+#menu img { width:205px;}
+
+.dropdown-menu li, .dropdown-menu li:last-child { border-bottom: 1px solid #ebebeb; width:98% !important; margin-left: 2%;}
+.dropdown-menu li:first-child { padding-top: 0; margin-top: -10px;}
+.dropdown-menu li:last-child { border-bottom: 0; padding-bottom: 10px;}
+
+.dropdown_idioma { margin-top: -20px;border-top:none;  padding:0;}
+.dropdown_idioma li a { font-size:14px; font-family: 'proxima-l'; text-transform: capitalize !important; padding-left: 20px;}
+.dropdown_idioma li:first-child { margin-top: 0px;}
+.dropdown_idioma li:last-child {  padding-bottom: 0;}
+
+#home { padding-top: 0;}
+.subheader-banner h1 { margin: 0; font-family: 'proxima-r';font-size: 38px; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); padding:52px 25px 0;}
+.subheader-banner p { font-size: 25px !important; padding: 0 25px; }
+
+/* Generales */
+#hosting, #cloud, #servidoresDedicados, #simpleClickToCall, #auditoriaConsultoriaDesarrollo, #clientes, #emailer { position:relative; padding:50px 0; }
+#home{ padding:0; }
+
+#emailer .content-caracteristicas .row, #emailer .content-caracteristicas .row .col  { border:none !important; }
+}
+
+@media (max-width:680px){
+.imagen-home { background: url('../img/cabeceras/revision-alpha-cloud-sm.jpg') center center no-repeat; width:100%; min-height:270px; height:auto; background-size: cover; padding:25px 20px 0px 20px; text-align: center; margin-bottom:38px;}
+.imagen-home h2 { margin-top:97px; margin-bottom:0;color: #fff; font-family: 'proxima-r';font-size: 34px; line-height:34px; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); }
+}
+
+@media (max-width:520px){
+.m_t_10 { margin-top: 10px !important;}
+.subheader-banner h1 { padding-top: 40px; font-size: 34px;}
+.subheader-banner p { font-size: 21px !important; padding: 0 25px; }
+}
+
+@media (max-width:480px){
+.menu-top .content-menu { margin-left:15px !important; }
+.menu-top .content-menu > li { margin-left:0;}
+.menu-top .content-menu > li .barra { visibility: visible; float:left;  margin-left:5px !important;}
+.menu-top .content-menu > li .fa { display: none;}
+}

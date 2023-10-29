@@ -34,8 +34,8 @@ use App\Http\Controllers\ChartController;
 Auth::routes(['verify' => true]);
 
 // Dashboard Route
-// Route::get('/', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/', [DashboardController::class, 'dashboardModern']);
+// Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->middleware('verified');
+Route::get('/dashboard', [DashboardController::class, 'dashboardModern']);
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
 Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
@@ -175,10 +175,21 @@ Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 
-// login
-Auth::routes();
+// site
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::view('/hosting', '/site/hosting')->name('hosting');
+Route::view('/cloud', '/site/cloud')->name('cloud');
+Route::view('/servidores-dedicados', '/site/servidores-dedicados')->name('servidores-dedicados');
+Route::view('/emailer', '/site/emailer')->name('emailer');
+Route::view('/simple-click-to-call', '/site/simple-click-to-call')->name('simple-click-to-call');
+Route::view('/auditoria-consultoria-desarrollo', '/site/auditoria-consultoria-desarrollo')->name('auditoria-consultoria-desarrollo');
+Route::view('/clientes', '/site/clientes')->name('clientes');
+Route::view('/contactenos', '/site/contactenos')->name('contactenos');
+Route::view('/terminos-y-condiciones', '/site/terminos-y-condiciones');
+Route::view('/el-datacenter', '/site/el-datacenter');
+Route::view('/sla', '/site/sla');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('guest');
 
 Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
 Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
