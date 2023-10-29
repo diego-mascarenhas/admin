@@ -22,6 +22,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\HostingController;
 use App\Http\Controllers\CloudController;
 use App\Http\Controllers\EmailerController;
+use App\Http\Controllers\ContratarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,10 +174,8 @@ Route::get('/charts-chartjs', [ChartController::class, 'chartJs']);
 Route::get('/charts-chartist', [ChartController::class, 'chartist']);
 Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 
-
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
-
 
 // site
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -191,6 +190,9 @@ Route::view('/contactenos', '/site/contactenos')->name('contactenos');
 Route::view('/terminos-y-condiciones', '/site/terminos-y-condiciones');
 Route::view('/el-datacenter', '/site/el-datacenter');
 Route::view('/sla', '/site/sla');
+
+Route::get('/contratar/{id}', [ContratarController::class, 'show'])->name('contratar');
+
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('guest');
 

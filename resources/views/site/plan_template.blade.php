@@ -18,7 +18,7 @@
 	@endif
 
 	@if (Route::currentRouteName() !== 'contratar')
-	<a href=" /contratar/plan/{{ $item->id }}"
+	<a href=" /contratar/{{ $item->id }}"
 				class="button button-medium margin-auto bc-red-4 margin-t-40">contratar</a>
 				@endif
 				@endif
