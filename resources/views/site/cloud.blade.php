@@ -2,11 +2,18 @@
 
 @section('content')
 
+<div id="subheader"> <header> <div class="subheader-banner"
+	style="background-image:url('/assets/img/cabeceras/cloud-server.jpg');">
+	<h1>Lo último en hosting e infraestructura</h1>
+	<p>Un plan a la medida de tu proyecto</p>
+</div>
+
 <div id="cloud">
 	<section class="container text-center">
 		<div class="cloud-descripcion">
-			<p><strong>Última tecnología</strong> en servidores para que tu proyecto logre una <strong>performance sobresaliente.</strong><br>
-			Experimenta la velocidad con <strong>Cloud Server</strong>.</p>
+			<p><strong>Última tecnología</strong> en servidores para que tu proyecto logre una <strong>performance
+					sobresaliente.</strong><br>
+				Experimenta la velocidad con <strong>Cloud Server</strong>.</p>
 		</div>
 
 		<div class="cloud-caracteristicas">
@@ -16,7 +23,8 @@
 						<p><strong>Máxima velocidad</strong></p>
 					</div>
 
-					<div class="col col-md-3" style="background-image:url('/assets/img/iconos/cloud-server-mayor-espacio.png');">
+					<div class="col col-md-3"
+						style="background-image:url('/assets/img/iconos/cloud-server-mayor-espacio.png');">
 						<p><strong>Mayor espacio</strong></p>
 					</div>
 
@@ -24,7 +32,8 @@
 						<p><strong>Recursos dedicados</strong></p>
 					</div>
 
-					<div class="col col-md-3" style="background-image:url('/assets/img/iconos/dominios-ilimitados.png');">
+					<div class="col col-md-3"
+						style="background-image:url('/assets/img/iconos/dominios-ilimitados.png');">
 						<p><strong>Dominios ilimitados</strong></p>
 					</div>
 				</div>

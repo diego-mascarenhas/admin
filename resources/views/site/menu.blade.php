@@ -1,8 +1,5 @@
 <!-- Menú -->
-<div id="menu" <?php if (isset($usuario['id']))
-{
-	echo " class=menu-user-logueado";
-} ?>>
+<div id="menu" @auth class="menu-user-logueado" @endauth>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -88,17 +85,14 @@
 									href="/clientes/">Clientes</a></li>
 							<li class="@if (Route::currentRouteName() === 'contactenos') active @endif"><a
 									href="/contactenos/">Contacto</a></li>
-							<?php if (!isset($usuario['id']))
-							{ ?>
+							@auth
 								<li class="hidden-xs pull-right <?php echo ($page ?? '' ?? '' == 'micuenta') ? 'active' : null; ?>">
 									<a href="{{ route('login') }}" style="float:left;"><i class="fa fa-sign-in margin-r-5"
 											aria-hidden="true"></i> Área de clientes</a>
 								</li>
-							<?php }
-							else
-							{ ?>
+							@else
 								<li>&nbsp;</li>
-							<?php } ?>
+							@endauth
 						</ul>
 					</div>
 				</nav>

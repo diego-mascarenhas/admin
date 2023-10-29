@@ -2,11 +2,21 @@
 
 @section('content')
 
+<div id="subheader"> <header> <div class="subheader-banner"
+	style="background-image:url('/assets/img/cabeceras/clientes.jpg');">
+	<h1>Las empresas que confían en nosotros</h1>
+	<p>Atención personalizada 24x7</p>
+</div>
+</header>
+</div>
+
 <div id="clientes">
 	<section class="text-center">
 		<div class="container">
 			<div class="clientes-descripcion">
-				<p>"La confianza nunca proviene de tener todas las respuestas, sino de estar abierto a todas las preguntas. <strong>La confianza es la base de toda relación humana, profesional y comercial</strong>."</p>
+				<p>"La confianza nunca proviene de tener todas las respuestas, sino de estar abierto a todas las
+					preguntas. <strong>La confianza es la base de toda relación humana, profesional y
+						comercial</strong>."</p>
 			</div>
 
 			<div class="clientes-clientes">
@@ -14,10 +24,12 @@
 					<div class="row">
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/miami-parking.png');">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/miami-parking.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Análisis y desarrollo del sistema de gestión de estacionamiento del estado de Florida, USA.</p>
+											<p>Análisis y desarrollo del sistema de gestión de estacionamiento del
+												estado de Florida, USA.</p>
 										</div>
 									</div>
 								</div>
@@ -30,8 +42,10 @@
 								<div class="image" style="background-image:url('/assets/img/clientes/gremond.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Magento e-commerce y Cloud Hosting para el portal que agrupa las marcas Rosenthal, Transit, Praqtico y Penta.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.grupogremond.com/" target="_blank">Visitar sitio</a>
+											<p>Magento e-commerce y Cloud Hosting para el portal que agrupa las marcas
+												Rosenthal, Transit, Praqtico y Penta.</p>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.grupogremond.com/" target="_blank">Visitar sitio</a>
 										</div>
 									</div>
 								</div>
@@ -41,10 +55,12 @@
 
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/wam.png'); background-color:#ffffff;">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/wam.png'); background-color:#ffffff;">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Hosting e infraestructura para medios de comunicación online de alto tránsito.</p>
+											<p>Hosting e infraestructura para medios de comunicación online de alto
+												tránsito.</p>
 										</div>
 									</div>
 								</div>
@@ -56,11 +72,13 @@
 					<div class="row">
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/tc2000.png'); background-color:black;">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/tc2000.png'); background-color:black;">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
 											<p>Infraestructura para los portales de la categoría automovilística.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.tc2000.com.ar/" target="_blank">Visitar sitio</a>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.tc2000.com.ar/" target="_blank">Visitar sitio</a>
 										</div>
 									</div>
 								</div>
@@ -70,7 +88,8 @@
 
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/answer-seguros.png');">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/answer-seguros.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
 											<p>Sistema de email Marketing para la promoción de pólizas de seguro.</p>
@@ -83,11 +102,14 @@
 
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/asociacion-de-hockey-amateur-de-buenos-aires.png');">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/asociacion-de-hockey-amateur-de-buenos-aires.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Servidores de producción y desarrollo para el portal de la Asociación de Hockey Amateur de Buenos Aires.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.ahba.com.ar/" target="_blank">Visitar sitio</a>
+											<p>Servidores de producción y desarrollo para el portal de la Asociación de
+												Hockey Amateur de Buenos Aires.</p>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.ahba.com.ar/" target="_blank">Visitar sitio</a>
 										</div>
 									</div>
 								</div>
@@ -112,11 +134,15 @@
 
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/casamientos-online.png');">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/casamientos-online.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Diagramación, programación y servicios de infraestructura para el portal número 1 de novias de Argentina.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.casamientosonline.com/" target="_blank">Visitar sitio</a>
+											<p>Diagramación, programación y servicios de infraestructura para el portal
+												número 1 de novias de Argentina.</p>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.casamientosonline.com/" target="_blank">Visitar
+												sitio</a>
 										</div>
 									</div>
 								</div>
@@ -126,7 +152,8 @@
 
 						<div class="col col-md-4">
 							<div class="col-content">
-								<div class="image" style="background-image:url('/assets/img/clientes/new-balance.png');">
+								<div class="image"
+									style="background-image:url('/assets/img/clientes/new-balance.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
 											<p>Sistema de email Marketing para todos los stores de zapatillas.</p>
@@ -144,7 +171,8 @@
 								<div class="image" style="background-image:url('/assets/img/clientes/clorox.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Sistema de gestión para la exportación de sus productos y servicio de Cloud.</p>
+											<p>Sistema de gestión para la exportación de sus productos y servicio de
+												Cloud.</p>
 										</div>
 									</div>
 								</div>
@@ -157,8 +185,10 @@
 								<div class="image" style="background-image:url('/assets/img/clientes/catapulta.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Diseño y desarrollo del portal con gestor de contenidos a medida para la editorial.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.catapulta.net/" target="_blank">Visitar sitio</a>
+											<p>Diseño y desarrollo del portal con gestor de contenidos a medida para la
+												editorial.</p>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.catapulta.net/" target="_blank">Visitar sitio</a>
 										</div>
 									</div>
 								</div>
@@ -171,8 +201,10 @@
 								<div class="image" style="background-image:url('/assets/img/clientes/cail.png');">
 									<div class="descripcion v-align">
 										<div class="aligned-content">
-											<p>Diseño, programación y hosting para el portal de letreros de Argentina.</p>
-											<a class="button button-smallest margin-auto bc-blue-5" href="http://www.cail.org.ar/" target="_blank">Visitar sitio</a>
+											<p>Diseño, programación y hosting para el portal de letreros de Argentina.
+											</p>
+											<a class="button button-smallest margin-auto bc-blue-5"
+												href="http://www.cail.org.ar/" target="_blank">Visitar sitio</a>
 										</div>
 									</div>
 								</div>
@@ -186,7 +218,8 @@
 
 		<div class="clientes-otros">
 			<div class="container">
-				<h4 class="section-title section-title-small margin-b-80"><span class="brc-blue-5">Otras empresas con las que trabajamos</span></h4>
+				<h4 class="section-title section-title-small margin-b-80"><span class="brc-blue-5">Otras empresas con
+						las que trabajamos</span></h4>
 
 				<div class="container-fluid">
 					<div class="row">

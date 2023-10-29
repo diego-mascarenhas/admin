@@ -2,6 +2,14 @@
 
 @section('content')
 
+<div id="subheader"> <header> <div class="subheader-banner"
+	style="background-image:url('/assets/img/cabeceras/emailer.jpg');">
+	<h1>Email Marketing simple y efectivo</h1>
+	<p>Comunicarte con tus clientes nunca fue tan fácil</p>
+</div>
+</div>
+</header>
+
 <div id="emailer">
 	<section class="container text-center">
 		<div class="content-descripcion">
@@ -74,12 +82,12 @@
 			<div class="container-fluid">
 				<div class="row">
 					<?php // foreach ($planes ?? '' as $item) { ?>
-						<?php // $caracteristicas = json_decode($item['caracteristicas'], true); ?>
-						<div class="col col-md-3 margin-b-15">
-							<div class="planCommon">
-								<?php // include('plan_template.php'); ?>
-							</div>
+					<?php // $caracteristicas = json_decode($item['caracteristicas'], true); ?>
+					<div class="col col-md-3 margin-b-15">
+						<div class="planCommon">
+							<?php // include('plan_template.php'); ?>
 						</div>
+					</div>
 					<?php // } ?>
 				</div>
 			</div>

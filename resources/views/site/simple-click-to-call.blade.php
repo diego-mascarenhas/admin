@@ -2,10 +2,20 @@
 
 @section('content')
 
+<div id="subheader"> <header> <div class="subheader-banner"
+	style="background-image:url('/assets/img/cabeceras/simple-click-to-call.jpg');">
+	<h1>Tu futuro cliente a un solo Click!</h1>
+	<p>Potencia tu negocio con una herramienta indispensable</p>
+</div>
+</header>
+</div>
+
 <div id="simpleClickToCall">
 	<section class="container text-center">
 		<div class="simpleClickToCall-descripcion">
-			<p><strong>Convierte tus visitantes en clientes brindando un servicio de respuesta rápida y eficiente.</strong><br>Aumenta tus ventas, mejora tu área de atención al cliente y potencia el contacto con tus clientes.</p>
+			<p><strong>Convierte tus visitantes en clientes brindando un servicio de respuesta rápida y
+					eficiente.</strong><br>Aumenta tus ventas, mejora tu área de atención al cliente y potencia el
+				contacto con tus clientes.</p>
 		</div>
 
 		<div class="simpleClickToCall-como-funciona">
@@ -30,7 +40,8 @@
 					<div class="col col-md-4">
 						<article>
 							<img src="/assets/img/sctc-paso-3.png">
-							<p>El sistema hace un llamado al número ingresado y otro a tu teléfono comunicando ambas partes.</p>
+							<p>El sistema hace un llamado al número ingresado y otro a tu teléfono comunicando ambas
+								partes.</p>
 						</article>
 					</div>
 				</div>
@@ -40,7 +51,8 @@
 		<div class="simpleClickToCall-caracteristicas">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col col-md-3" style="background-image:url('/assets/img/iconos/auditoria-consultoria.png');">
+					<div class="col col-md-3"
+						style="background-image:url('/assets/img/iconos/auditoria-consultoria.png');">
 						<p><strong>Número propio para indentificación de sus llamadas</strong></p>
 					</div>
 
@@ -63,9 +75,11 @@
 			<h2 class="section-title margin-b-50"><span>Por qué contratar Simple Click To Call</span></h2>
 
 			<ul>
-				<li>Configuramos el botón en tu página <strog>GRATIS!</strog></li>
+				<li>Configuramos el botón en tu página <strog>GRATIS!</strog>
+				</li>
 				<li>Soporte al instante en horario comercial</li>
-				<li>El servicio se brinda a través de la red de telefonía tradicional facilitando el uso y mejorando la calidad de la voz en comparación con la telefonía sobre Internet</li>
+				<li>El servicio se brinda a través de la red de telefonía tradicional facilitando el uso y mejorando la
+					calidad de la voz en comparación con la telefonía sobre Internet</li>
 			</ul>
 		</div>
 
@@ -91,7 +105,8 @@
 			<h2 class="section-title margin-b-50"><span>¡Comenzá hoy mismo!</span></h2>
 
 			<div class="sctcCommon">
-				<p>Si tenés alguna duda hace click en el botón a continuación<br>para contactarte de manera inmediata</p>
+				<p>Si tenés alguna duda hace click en el botón a continuación<br>para contactarte de manera inmediata
+				</p>
 				<a href="#" class="button button-large margin-auto bc-blue-5 margin-t-30">Click To Call</a>
 			</div>
 		</div>

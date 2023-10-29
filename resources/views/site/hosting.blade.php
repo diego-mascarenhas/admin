@@ -2,6 +2,14 @@
 
 @section('content')
 
+<div id="subheader"> <header> <div class="subheader-banner"
+	style="background-image:url('/assets/img/cabeceras/web-hosting.jpg');">
+	<h1>El espacio que tu Página web necesita</h1>
+	<p>Te brindamos el mejor servicio de hosting del mercado</p>
+</div>
+</div>
+</header>
+
 <div id="hosting">
 	<section class="container text-center">
 		<div class="hosting-caracteristicas">
@@ -10,14 +18,16 @@
 					<div class="col col-md-6">
 						<article style="background-image:url('/assets/img/iconos/panel-de-control.png');">
 							<h4>El Panel de Control más intuitivo</h4>
-							<p>Con cPanel podrás gestionar y configurar cada recurso de tu alojamiento web en forma simple y sencilla.</p>
+							<p>Con cPanel podrás gestionar y configurar cada recurso de tu alojamiento web en forma
+								simple y sencilla.</p>
 						</article>
 					</div>
 
 					<div class="col col-md-6">
 						<article style="background-image:url('/assets/img/iconos/migracion.png');">
 							<h4>Migración gratuita</h4>
-							<p>Te ayudamos a trasladar tu sitio hacia nuestros servidores sin que tengas que hacer nada.</p>
+							<p>Te ayudamos a trasladar tu sitio hacia nuestros servidores sin que tengas que hacer nada.
+							</p>
 						</article>
 					</div>
 				</div>
@@ -26,14 +36,16 @@
 					<div class="col col-md-6">
 						<article style="background-image:url('/assets/img/iconos/velocidad.png');">
 							<h4>Velocidad sorprendente</h4>
-							<p>Nuestros servidores están equipados con hardware de última generación lo que significa en mayor velocidad para tu sitio.</p>
+							<p>Nuestros servidores están equipados con hardware de última generación lo que significa en
+								mayor velocidad para tu sitio.</p>
 						</article>
 					</div>
 
 					<div class="col col-md-6">
 						<article style="background-image:url('/assets/img/iconos/seguridad.png');">
 							<h4>Máxima seguridad</h4>
-							<p>Garantizamos la privacidad de sus archivos contra cualquier tipo de ataque informático.</p>
+							<p>Garantizamos la privacidad de sus archivos contra cualquier tipo de ataque informático.
+							</p>
 						</article>
 					</div>
 				</div>
@@ -42,7 +54,8 @@
 					<div class="col col-md-6">
 						<article style="background-image:url('/assets/img/iconos/auditoria-consultoria.png');">
 							<h4>Asesoramiento profesional</h4>
-							<p>Contamos con un centro de atención las 24hs para dar soluciones rápidas y efectivas a tus necesidades.</p>
+							<p>Contamos con un centro de atención las 24hs para dar soluciones rápidas y efectivas a tus
+								necesidades.</p>
 						</article>
 					</div>
 
@@ -58,7 +71,7 @@
 
 		<div class="hosting-planes margin-b-50">
 			<h2 class="section-title margin-b-50"><span>Nuestros planes</span></h2>
-	    	<div class="container-fluid">
+			<div class="container-fluid">
 				<div class="row">
 					<?php //foreach ($planes ?? '' as $item) { ?>
 					<?php //$caracteristicas = json_decode($item['caracteristicas'], true); ?>
