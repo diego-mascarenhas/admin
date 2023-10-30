@@ -13,11 +13,11 @@ class EmailController extends Controller
     {
         // Validación de campos
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
-            'empresa' => 'required|string',
+            'nombre' => 'required|string|min:5|max:100',
+            'empresa' => 'nullable|string',
             'email' => 'required|email',
             'telefono' => 'nullable|string|max:20',
-            //'aceptar_terminos' => 'accepted',
+            'mensaje' => 'required|string|min:10',
         ]);
 
         if ($validator->fails()) {
@@ -26,14 +26,22 @@ class EmailController extends Controller
                 ->withInput();
         }
 
-
         $nombre = $request->input('nombre');
         $empresa = $request->input('empresa');
         $email = $request->input('email');
         $telefono = $request->input('telefono');
+        $mensaje = $request->input('mensaje');
 
-        Mail::to('formularios@admin.revisionalpha.es')->send(new EmailEnvio($nombre, $empresa, $email, $telefono));
+        $email = new EmailEnvio($nombre, $empresa, $email, $telefono, $mensaje);
 
-        return "Correo enviado exitosamente";
+        try {
+            Mail::to('formularios@admin.revisionalpha.es')->send($email);
+        
+            session()->flash('success', '¡El correo se ha enviado con éxito!');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Hubo un error al enviar el correo: ' . $e->getMessage());
+        }
+    
+        return redirect()->back();
     }
 }

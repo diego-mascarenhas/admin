@@ -20,31 +20,22 @@
 					<p class="margin-b-40">Por consultas acerca de cualquiera de nuestros productos o servicios puede
 						hacerlo por medio del siguiente formulario:</p>
 
-					<?php if (isset($validation)) : ?>
-					<div class="col-12">
+					@if(session('error'))
+					<div class="col-md-12">
 						<div class="alert alert-danger" role="alert">
-							<?= $validation->listErrors() ?>
+							{{ session('error') }}
 						</div>
 					</div>
-					<?php endif; ?>
+					@endif
 
-					<?php if (isset($form)) { ?>
-					<?php if ($form['envio'] == 'ok') { ?>
+					@if(session('success'))
 					<div class="col-md-12">
 						<div class="alert alert-success" role="alert">
-							El mensaje ha sido enviado, muchas gracias por contactarse.
+							{{ session('success') }}
 						</div>
 					</div>
+					@else
 
-					<?php } elseif ($form['envio'] == 'error') { ?>
-					<div class="col-md-12">
-						<div class="alert alert-danger" role="alert">
-							Se produjo un error al querer enviar el formulario, por favor prueba más tarde.
-						</div>
-					</div>
-					<?php } ?>
-
-					<?php } else { ?>
 					<form action="{{ route('enviar.email') }}" method="post">
 						@csrf
 						<div class="row">
@@ -52,16 +43,16 @@
 								<input type="text" name="nombre" placeholder="Nombre y apellido (*)"
 									class="form-control" id="nombre" value="{{ old('nombre') }}">
 									@error('nombre')
-        <div class="text-danger">{{ $message }}</div>
-    @enderror
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
 							</div>
 
 							<div class="col-sm-6 form-group">
 								<input type="text" name="empresa" placeholder="Empresa"
 									class="form-control" id="empresa" value="{{ old('empresa') }}">
 									@error('empresa')
-        <div class="text-danger">{{ $message }}</div>
-    @enderror
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
 							</div>
 						</div>
 
@@ -70,29 +61,32 @@
 								<input type="email" name="email" placeholder="Email (*)"
 									class="form-control" id="email" value="{{ old('email') }}">
 									@error('email')
-        <div class="text-danger">{{ $message }}</div>
-    @enderror
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
 							</div>
 
 							<div class="col-sm-6 form-group">
 								<input type="text" name="telefono" placeholder="Teléfono"
 									class="form-control" id="telefono" value="{{ old('telefono') }}">
 									@error('telefono')
-        <div class="text-danger">{{ $message }}</div>
-    @enderror
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
 							</div>
 						</div>
 
 						<div class="form-group">
 							<textarea name="mensaje" placeholder="Mensaje (*)"
-								class="form-control"><?php echo (isset($detalle['mensaje'])) ? $detalle['mensaje'] : null; ?></textarea>
+								class="form-control">{{ old('mensaje') }}</textarea>
+								@error('mensaje')
+									<div class="text-danger small">{{ $message }}</div>
+								@enderror
 						</div>
 
 						<div class="form-group text-right">
 							<button type="submit" class="button bc-red-4 inline">Enviar</button>
 						</div>
 					</form>
-					<?php } ?>
+					@endif
 
 				</div>
 			</div>

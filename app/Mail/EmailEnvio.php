@@ -20,13 +20,15 @@ class EmailEnvio extends Mailable
     public $empresa;
     public $email;
     public $telefono;
+    public $mensaje;
 
-    public function __construct($nombre, $empresa, $email, $telefono)
+    public function __construct($nombre, $empresa, $email, $telefono, $mensaje)
     {
         $this->nombre = $nombre;
         $this->empresa = $empresa;
         $this->email = $email;
         $this->telefono = $telefono;
+        $this->mensaje = $mensaje;
     }
 
     /**
@@ -37,7 +39,7 @@ class EmailEnvio extends Mailable
     public function build()
     {
         return $this
-            ->subject('Correo de ejemplo')
-            ->view('emails.envio');
+            ->subject('Contacto desde revision alpha')
+            ->view('emails.contactenos');
     }
 }
