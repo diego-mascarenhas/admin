@@ -6,51 +6,71 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GeneralCategory;
 
+use App\Mail\ContratarEnvio;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
+
+
 class ContratarController extends Controller
 {
     public function index()
     {
-        $planes = GeneralCategory::where('grupo', 515)
-            ->where('id_tipo', 2)
-            ->where('estado', 3)
-            ->orderBy('orden', 'ASC')
-            ->take(3)
-            ->get();
-
-        foreach ($planes as $plan)
-        {
-            $plan->caracteristicas = json_decode($plan->caracteristicas, true);
-        }
-
-        return view('site.cloud', ['planes' => $planes]);
+        return redirect()->back();
     }
 
-
-    public function show($id)
+    public function create($id)
     {
         $item = GeneralCategory::find($id);
-
-        // if (!$plan) {
-        //     // Manejar el caso en el que el plan no se encuentra
-        //     return redirect()->route('ruta_para_redireccionar_si_no_se_encuentra');
-        // }
-
-        // Ahora puedes acceder a los datos del plan
-        //$nombre = $plan->id;
-        //$descripcion = $plan->categoria;
-        // Y así sucesivamente
 
         $item->caracteristicas = json_decode($item->caracteristicas, true);
 
         return view('site.contratar', compact('item'));
+    }
 
 
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|min:3|max:100',
+            'empresa' => 'nullable|string',
+            'email' => 'required|email',
+            'telefono' => 'nullable|string|max:20',
+            'id_plan' => 'required|integer',
+            'terminos' => 'accepted',
+            'dominio' => [
+                'nullable',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) use ($request) {
+                    if (in_array($request->input('id_tipo'), [1, 2]) && empty($value)) {
+                        $fail('El dominio es obligatorio para los planes de Hosting.');
+                    }
+                },
+            ],
+        ]);
 
-        // foreach ($planes as $plan)
-        // {
-        //     $plan->caracteristicas = json_decode($plan->caracteristicas, true);
-        // }
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
-        //return view('site.contratar', ['plan' => $planes]);
+        $nombre = $request->input('nombre');
+        $empresa = $request->input('empresa');
+        $email = $request->input('email');
+        $telefono = $request->input('telefono');
+        $id_plan = $request->input('id_plan');
+        $dominio = $request->input('dominio');
+
+        $email = new ContratarEnvio($nombre, $empresa, $email, $telefono, $id_plan, $dominio);
+
+        try {
+            Mail::to('formularios@admin.revisionalpha.es')->send($email);
+        
+            return redirect()->route('contratar.create', ['id' => $id_plan])->with('success', 'Contratación exitosa!');
+        } catch (\Exception $e) {
+            return redirect()->route('contratar.create')->with('error', 'Hubo un error en el proceso de contratación: ' . $e->getMessage());
+        }
     }
 }

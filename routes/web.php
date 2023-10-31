@@ -193,7 +193,9 @@ Route::view('/terminos-y-condiciones', '/site/terminos-y-condiciones');
 Route::view('/el-datacenter', '/site/el-datacenter');
 Route::view('/sla', '/site/sla');
 
-Route::get('/contratar/{id}', [ContratarController::class, 'show'])->name('contratar');
+Route::get('/contratar', [ContratarController::class, 'index'])->name('contratar');
+Route::get('/contratar/{id}', [ContratarController::class, 'create'])->name('contratar.create');
+Route::post('/contratar', [ContratarController::class, 'store'])->name('contratar.store');
 
 Route::post('/enviar-email', [EmailController::class, 'enviarEmail'])->name('enviar.email');
 

@@ -16,82 +16,83 @@
 				<h3 class="section-title section-title-full margin-b-20">Contratar</h3>
 
 				<div class="content-contacto margin-b-50">
-					<?php //if (!isset($user['id'])) { ?>
+					@guest
 					<p class="margin-b-40">
 						Si ya se encuentra registrado en nuestro sitio, inicie sesión antes de continuar con el alta de
 						plan. De lo contrario complete los datos de contacto que figuran a continuación.
 						<a href="/login?redirect=contratar/plan/"
 							class="button button-medium margin-auto bc-red-4 margin-t-40">Acceder</a>
 					</p>
-					<?php //} else { ?>
+					@else
 					<p class="margin-b-40">Ya se encuentra conectado a nuestro sistema y el plan quedará asociado a su
 						empresa.</p>
-					<?php //} ?>
+					@endguest
 
-					<?php //if (isset($validation)) : ?>
-					<div class="col-md-12">
-						<div class="alert alert-danger" role="alert">
-						</div>
-					</div>
-					<?php // endif; ?>
-
-					<?php //if (isset($form)) { ?>
-					<?php //if ($form['envio'] == 'ok') { ?>
-					<div class="col-md-12">
-						<div class="alert alert-success" role="alert">
-							El mensaje ha sido enviado, muchas gracias por contactarse.
-						</div>
-					</div>
-
-					<?php //} elseif ($form['envio'] == 'error') { ?>
-					<div class="col-md-12">
-						<div class="alert alert-danger" role="alert">
-							Se produjo un error al querer enviar el formulario, por favor prueba más tarde.
-						</div>
-					</div>
-					<?php //} ?>
-
-					<?php //} else { ?>
-					<form action="/contratar/plan/<?php echo $item['id']; ?>" id="contratar" method="post"
-						accept-charset="utf-8">
-						<input type="hidden" name="id" value="<?php echo $item['id']; ?>">
-						<input type="hidden" name="id_tipo" value="<?php echo $item['id_tipo']; ?>">
-
-						<?php //if (isset($user['id'])) { ?>
-						<input type="hidden" name="id_contacto" value="<?php //echo $user['id']; ?>">
-						<input type="hidden" name="nombre" value="<?php //echo $user['contacto']; ?>">
-						<input type="hidden" name="email" value="<?php //echo $user['email']; ?>">
-						<?php //} ?>
-
-						<?php //if (!isset($user['id'])) { ?>
-						<div class="row">
-							<div class="col-sm-6 form-group">
-								<input type="text" name="nombre" placeholder="Nombre y apellido (*)"
-									value="<?php echo (isset($detalle['nombre'])) ? $detalle['nombre'] : null; ?>"
-									class="form-control">
-							</div>
-
-							<div class="col-sm-6 form-group">
-								<input type="text" name="empresa" placeholder="Empresa"
-									value="<?php echo (isset($detalle['empresa'])) ? $detalle['empresa'] : null; ?>"
-									class="form-control">
+					@if(session('error'))
+						<div class="col-md-12">
+							<div class="alert alert-danger" role="alert">
+								{{ session('error') }}
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-sm-6 form-group">
-								<input type="email" name="email" placeholder="Email (*)"
-									value="<?php echo (isset($detalle['email'])) ? $detalle['email'] : null; ?>"
-									class="form-control">
-							</div>
-
-							<div class="col-sm-6 form-group">
-								<input type="text" name="telefono" placeholder="Teléfono"
-									value="<?php echo (isset($detalle['telefono'])) ? $detalle['telefono'] : null; ?>"
-									class="form-control">
+					@elseif(session('success'))
+						<div class="col-md-12">
+							<div class="alert alert-success" role="alert">
+								{{ session('success') }}
 							</div>
 						</div>
-						<?php //} ?>
+					@endif
+
+					@unless(session('success'))
+					<form action="{{ route('contratar.store') }}" method="post">
+						@csrf
+						<input type="hidden" name="id_plan" value="{{ $item->id }}">
+						<input type="hidden" name="id_tipo" value="{{ $item->id_tipo }}">
+
+						@auth
+							<input type="hidden" name="id_contacto" value="{{ auth()->user()->id }}">
+							<input type="hidden" name="nombre" value="{{ auth()->user()->name }}">
+							<input type="hidden" name="email" value="{{ auth()->user()->email }}">
+
+						@else
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<input type="text" name="nombre" placeholder="Nombre y apellido (*)"
+										value="{{ old('nombre') }}"
+										class="form-control">
+									@error('nombre')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+
+								<div class="col-sm-6 form-group">
+									<input type="text" name="empresa" placeholder="Empresa"
+										value="{{ old('empresa') }}"
+										class="form-control">
+									@error('empresa')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<input type="email" name="email" placeholder="Email (*)"
+										value="{{ old('email') }}"
+										class="form-control">
+									@error('email')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+
+								<div class="col-sm-6 form-group">
+									<input type="text" name="telefono" placeholder="Teléfono"
+										value="{{ old('telefono') }}"
+										class="form-control">
+									@error('telefono')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+						@endauth
 
 						<h4 class="form-subtitle">Detalles del plan</h4>
 						<p class="margin-b-20">Ha seleccionado <strong>
@@ -105,13 +106,16 @@
 								</div>
 							</div>
 
-							<?php //if ($item['id_tipo'] == 1 || $item['id_tipo'] == 2) { ?>
+							@if ($item->id_tipo == 1 || $item->id_tipo == 2)
 							<div class="col-sm-6 form-group">
 								<input type="text" name="dominio" id="dominio" placeholder="Dominio (*)"
-									value="<?php echo (isset($detalle['dominio'])) ? $detalle['dominio'] : null; ?>"
+									value="{{ old('dominio') }}"
 									class="form-control">
+									@error('dominio')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
 							</div>
-							<?php //} ?>
+							@endif
 						</div>
 
 						<div class="form-group terminos">
@@ -119,11 +123,14 @@
 									(isset($detalle['terminos'])) ? 'checked' : null; ?>> Acepto todos los <a
 									class="link" href="/terminos-y-condiciones" target="_blank">términos y
 									condiciones</a>.</p>
+								@error('terminos')
+									<div class="text-danger small">{{ $message }}</div>
+								@enderror
 						</div>
 
 						<div class="form-group text-right">
 							<input type="text" name="cupon" placeholder="Cupón de descuento"
-								value="<?php echo (isset($detalle['cupon'])) ? $detalle['cupon'] : null; ?>"
+								value="{{ old('cupon') }}"
 								class="form-control inline margin-b-10" style="width:200px; vertical-align:top;">
 							<button type="submit"
 								class="button bc-red-4 inline margin-l-5 margin-b-10">Confirmar</button>
@@ -131,7 +138,7 @@
 							<div class="clear"></div>
 						</div>
 					</form>
-					<?php //} ?>
+					@endunless
 				</div>
 			</div>
 

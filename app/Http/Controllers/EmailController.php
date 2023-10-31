@@ -11,7 +11,6 @@ class EmailController extends Controller
 {
     public function enviarEmail(Request $request)
     {
-        // Validación de campos
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|min:5|max:100',
             'empresa' => 'nullable|string',

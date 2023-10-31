@@ -79,8 +79,8 @@
 										<span>--<br>
 										<strong>ADMINISTRACIÓN</strong> | REVISION ALPHA<br>
 										González Besada 39 Oviedo, Asturias | +34 722.372.858</span><br>
-										Miami Beach, Fl 33119 | +001.305 534.5678<br>
-                                        Donado 840, CABA | +54.11 5274.8490
+										Miami Beach, Fl 33119 | +001 305.534.5678<br>
+                                        Donado 840, CABA | +54 11.5274.8490
 									</td>
 								</tr>
 								<tr>
