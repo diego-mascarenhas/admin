@@ -104,10 +104,10 @@
 											<tr>
 												<td>
 													<a href="https://www.revisionalpha.es/" style="font-size:17px; color:#FFFFFF; text-decoration:none;"><img src="{{ asset('assets/img/logo-footer-email.png') }}" alt="revision alpha" style="display:block; position:relative;">
-													www.revisionalpha.com</a>
+													www.revisionalpha.es</a>
 												</td>
 												<td align="right">
-													<span style="color:#FFFFFF"><strong>Contáctenos:</strong> <span style="color:#FFFFFF !important">+54.11 6632.2134</span><br>
+													<span style="color:#FFFFFF"><strong>Contáctenos:</strong> <span style="color:#FFFFFF !important">+34 722.372.858</span><br>
 													<strong>Email:</strong> <a href="mailto:info@revisionalpha.es?subject=Consulta" style="color:inherit;">info@revisionalpha.es</a></span>
 												</td>
 											</tr>

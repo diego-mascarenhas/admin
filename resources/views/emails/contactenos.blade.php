@@ -15,9 +15,6 @@
 		<p>Email: {{ $email }}</p>
 		<p>Teléfono: {{ $telefono ?? 'Sin número de teléfono' }}</p>
 		<p>Mensaje: {!! $mensaje !!}</p>
-		
-		<br>
-		If you have not made any changes, please inform us of this notification  through <a href="https://www.revisionalpha.es/contactenos/" style="color:#FF6666;">our contact form</a>.
 	</td>
 </tr>
 

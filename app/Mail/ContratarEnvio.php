@@ -22,8 +22,9 @@ class ContratarEnvio extends Mailable
     public $telefono;
     public $id_plan;
     public $dominio;
+    public $plan;
 
-    public function __construct($nombre, $empresa, $email, $telefono, $id_plan, $dominio)
+    public function __construct($nombre, $empresa, $email, $telefono, $id_plan, $dominio, $plan)
     {
         $this->nombre = $nombre;
         $this->empresa = $empresa;
@@ -31,6 +32,7 @@ class ContratarEnvio extends Mailable
         $this->telefono = $telefono;
         $this->id_plan = $id_plan;
         $this->dominio = $dominio;
+        $this->dominio = $plan;
     }
 
     /**
@@ -41,7 +43,7 @@ class ContratarEnvio extends Mailable
     public function build()
     {
         return $this
-            ->subject('Nuevo servicio contratado')
+            ->subject('Alta de Servicio')
             ->view('emails.contratar');
     }
 }

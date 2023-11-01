@@ -10,15 +10,8 @@ use App\Mail\ContratarEnvio;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-
-
 class ContratarController extends Controller
 {
-    public function index()
-    {
-        return redirect()->back();
-    }
-
     public function create($id)
     {
         $item = GeneralCategory::find($id);
@@ -62,15 +55,16 @@ class ContratarController extends Controller
         $telefono = $request->input('telefono');
         $id_plan = $request->input('id_plan');
         $dominio = $request->input('dominio');
+        $cupon = $request->input('dominio');
 
-        $email = new ContratarEnvio($nombre, $empresa, $email, $telefono, $id_plan, $dominio);
+        $email = new ContratarEnvio($nombre, $empresa, $email, $telefono, $id_plan, $dominio, $cupon);
 
         try {
             Mail::to('formularios@admin.revisionalpha.es')->send($email);
         
-            return redirect()->route('contratar.create', ['id' => $id_plan])->with('success', 'Contratación exitosa!');
+            return redirect()->route('contratar.create', ['id' => $id_plan])->with('success', 'Su plan ha sido dado de alta, en breve le estaremos enviando los accesos a su email.');
         } catch (\Exception $e) {
-            return redirect()->route('contratar.create')->with('error', 'Hubo un error en el proceso de contratación: ' . $e->getMessage());
+            return redirect()->route('contratar.create')->with('error', 'Se ha producido un error al querer crear el plan, por favor inténtalo más tarde. (' . $e->getMessage() . ')');
         }
     }
 }

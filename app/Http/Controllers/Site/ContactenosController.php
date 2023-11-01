@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Mail\EmailEnvio;
+
+use App\Mail\ContactenosEnvio;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-class EmailController extends Controller
+class ContactenosController extends Controller
 {
-    public function enviarEmail(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|min:5|max:100',
@@ -31,7 +33,7 @@ class EmailController extends Controller
         $telefono = $request->input('telefono');
         $mensaje = $request->input('mensaje');
 
-        $email = new EmailEnvio($nombre, $empresa, $email, $telefono, $mensaje);
+        $email = new ContactenosEnvio($nombre, $empresa, $email, $telefono, $mensaje);
 
         try {
             Mail::to('formularios@admin.revisionalpha.es')->send($email);
