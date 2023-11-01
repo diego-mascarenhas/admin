@@ -20,6 +20,12 @@ use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
 
+use App\Http\Controllers\Site\HostingController;
+use App\Http\Controllers\Site\CloudController;
+use App\Http\Controllers\Site\EmailerController;
+use App\Http\Controllers\Site\ContratarController;
+use App\Http\Controllers\Site\ContactenosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,8 +40,8 @@ use App\Http\Controllers\ChartController;
 Auth::routes(['verify' => true]);
 
 // Dashboard Route
-// Route::get('/', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/', [DashboardController::class, 'dashboardModern']);
+// Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->middleware('verified');
+Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->name('dashboard');
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
 Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
@@ -170,19 +176,32 @@ Route::get('/charts-chartjs', [ChartController::class, 'chartJs']);
 Route::get('/charts-chartist', [ChartController::class, 'chartist']);
 Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 
-
-// locale route
+// Locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
+// Site
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/hosting', [HostingController::class, 'index'])->name('hosting');
+Route::get('/cloud', [CloudController::class, 'index'])->name('cloud');
+Route::view('/servidores-dedicados', '/site/servidores-dedicados')->name('servidores-dedicados');
+Route::get('/emailer', [EmailerController::class, 'index'])->name('emailer');
+Route::view('/simple-click-to-call', '/site/simple-click-to-call')->name('simple-click-to-call');
+Route::view('/auditoria-consultoria-desarrollo', '/site/auditoria-consultoria-desarrollo')->name('auditoria-consultoria-desarrollo');
+Route::view('/clientes', '/site/clientes')->name('clientes');
 
-// login
-Auth::routes();
+Route::view('/terminos-y-condiciones', '/site/terminos-y-condiciones');
+Route::view('/el-datacenter', '/site/el-datacenter');
+Route::view('/sla', '/site/sla');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::view('/contactenos', '/site/contactenos')->name('contactenos');
+Route::post('/contactenos', [ContactenosController::class, 'store'])->name('enviar.email');
 
+Route::get('/contratar', function () { return redirect()->back(); });
+Route::get('/contratar/{id}', [ContratarController::class, 'create'])->name('contratar.create');
+Route::post('/contratar', [ContratarController::class, 'store'])->name('contratar.store');
+
+
+// CMS
 Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
 Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
 Route::post('/contacts', [UserController::class, 'store'])->name('contacts');
-//Route::get('/contacts/{id}', [UserController::class, 'show'])->name('contacts-show');
-//Route::patch('/contacts/{id}', [UserController::class, 'update'])->name('contacts-update');
-//Route::delete('/contacts/{id}', [UserController::class, 'destroy'])->name('contacts-destroy');
