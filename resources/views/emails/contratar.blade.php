@@ -10,9 +10,12 @@
 </tr>
 <tr>
 	<td>		
-		<p>Nombre: <strong>{{ $nombre }}</strong></p>	
+		<p>Nombre: {{ $nombre }}</p>	
 		<p>Empresa: {{ $empresa ?? 'No especificó la empresa' }}</p>
+		<p>Razón Social: {{ $razon_social }}</p>	
+		<p>Documento: {{ $documento }}</p>
 		<p>Email: {{ $email }}</p>
+		<p>Contraseña: {{ $password }}</p>
 		<p>Teléfono: {{ $telefono ?? 'No ingresó el teléfono' }}</p>
 		<p>Plan: {{ $id_plan }}</p>
 		@if(isset($dominio))

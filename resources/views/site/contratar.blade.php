@@ -92,6 +92,25 @@
 									@enderror
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<input type="text" name="razon_social" placeholder="Razón Social (*)"
+										value="{{ old('razon_social') }}"
+										class="form-control">
+									@error('razon_social')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+
+								<div class="col-sm-6 form-group">
+									<input type="text" name="documento" placeholder="NIF/CIFF (*)"
+										value="{{ old('documento') }}"
+										class="form-control">
+									@error('documento')
+										<div class="text-danger small">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
 						@endauth
 
 						<h4 class="form-subtitle">Detalles del plan</h4>
