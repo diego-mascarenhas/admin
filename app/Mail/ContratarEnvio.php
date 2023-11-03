@@ -23,11 +23,11 @@ class ContratarEnvio extends Mailable
     public $email;
     public $password;
     public $telefono;
-    public $id_plan;
+    public $id;
     public $dominio;
     public $cupon;
 
-    public function __construct($nombre, $empresa, $razon_social, $documento, $email, $password, $telefono, $id_plan, $dominio, $cupon)
+    public function __construct($nombre, $empresa, $razon_social, $documento, $email, $password, $telefono, $id, $dominio, $cupon)
     {
         $this->nombre = $nombre;
         $this->empresa = $empresa;
@@ -36,7 +36,7 @@ class ContratarEnvio extends Mailable
         $this->email = $email;
         $this->password = $password;
         $this->telefono = $telefono;
-        $this->id_plan = $id_plan;
+        $this->id = $id;
         $this->dominio = $dominio;
         $this->cupon = $cupon;
     }
