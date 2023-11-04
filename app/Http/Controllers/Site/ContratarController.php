@@ -46,41 +46,41 @@ class ContratarController extends Controller
         //     $request->merge(['dominio' => $dominio]);
         // }
 
-        $password = Str::random(12);
-
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|min:3|max:100',
-            'empresa' => 'nullable|string',
-            'email' => 'required|string|email|max:255|unique:users',
-            'telefono' => 'nullable|string|max:20',
-            'razon_social' => 'required|string',
-            'documento' => 'required|string',
-            'id' => 'required|integer',
-            'terminos' => 'accepted',
-            //'dominio' => 'url',
-            'dominio' => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) use ($request)
-                {
-                    if (in_array($request->input('id_tipo'), [1, 2]) && empty($value))
-                    {
-                        $fail('El dominio es obligatorio para los planes de Hosting');
-                    }
-                },
-            ],
-        ]);
-
-        if ($validator->fails())
-        {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        // Crear un nuevo usuario
         if (auth()->guest())
         {
+            $password = Str::random(12);
+
+            $validator = Validator::make($request->all(), [
+                'nombre' => 'required|string|min:3|max:100',
+                'empresa' => 'nullable|string',
+                'email' => 'required|string|email|max:255|unique:users',
+                'telefono' => 'nullable|string|max:20',
+                'razon_social' => 'required|string',
+                'documento' => 'required|string',
+                'id' => 'required|integer',
+                'terminos' => 'accepted',
+                //'dominio' => 'url',
+                'dominio' => [
+                    'nullable',
+                    'string',
+                    function ($attribute, $value, $fail) use ($request)
+                    {
+                        if (in_array($request->input('id_tipo'), [1, 2]) && empty($value))
+                        {
+                            $fail('El dominio es obligatorio para los planes de Hosting');
+                        }
+                    },
+                ],
+            ]);
+    
+            if ($validator->fails())
+            {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            // Crear un nuevo usuario
             $user = new User;
             $user->name = $request->input('nombre');
             $user->email = $request->input('email');
@@ -132,18 +132,64 @@ class ContratarController extends Controller
             $service->frecuencia = $request->input('frecuencia');
             $service->save();
 
+            $nombre = $request->input('nombre');
+            $empresa = $request->input('empresa');
+            $razon_social = $request->input('razon_social');
+            $documento = $request->input('documento');
+            $email = $request->input('email');
+            $telefono = $request->input('telefono');
+            $id = $request->input('id');
+            $dominio = $request->input('dominio');
+            $cupon = $request->input('cupon');
+        }
+        else
+        {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer',
+                'terminos' => 'accepted',
+                //'dominio' => 'url',
+                'dominio' => [
+                    'nullable',
+                    'string',
+                    function ($attribute, $value, $fail) use ($request)
+                    {
+                        if (in_array($request->input('id_tipo'), [1, 2]) && empty($value))
+                        {
+                            $fail('El dominio es obligatorio para los planes de Hosting');
+                        }
+                    },
+                ],
+            ]);
+    
+            if ($validator->fails())
+            {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+    
+            // Crear servicio
+            $service = new CmsService;
+            $service->grupo = env('CMSGROUP');
+            $service->id_empresa = CmsContact::getIdEnterpriseFromIdUser(auth()->user()->id);
+            $service->id_categoria = $request->input('id');
+            $service->frecuencia = $request->input('frecuencia');
+            $service->save();
+
+            $nombre = auth()->user()->name;
+            $email = auth()->user()->email;
+            $id = $request->input('id');
+            $dominio = $request->input('dominio');
+            $cupon = $request->input('cupon');
+
+            $empresa = null;
+            $razon_social = null;
+            $documento = null;
+            $telefono = null;
+            $password = null;
         }
 
-        $nombre = $request->input('nombre');
-        $empresa = $request->input('empresa');
-        $razon_social = $request->input('razon_social');
-        $documento = $request->input('documento');
-        $email = $request->input('email');
-        $telefono = $request->input('telefono');
-        $id = $request->input('id');
-        $dominio = $request->input('dominio');
-        $cupon = $request->input('cupon');
-
+        
         $email = new ContratarEnvio($nombre, $empresa, $razon_social, $documento, $email, $password, $telefono, $id, $dominio, $cupon);
 
         try

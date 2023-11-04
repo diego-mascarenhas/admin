@@ -21,4 +21,14 @@ class CmsContact extends Model
         'celular',
         'data'
     ];
+
+    public static function getIdEnterpriseFromIdUser($id_user) {
+        $contacto = self::where('id_user', $id_user)->first();
+
+        if ($contacto) {
+            return $contacto->id_empresa;
+        } else {
+            return null;
+        }
+    }
 }
