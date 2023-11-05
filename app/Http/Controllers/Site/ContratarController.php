@@ -133,12 +133,9 @@ class ContratarController extends Controller
             $service->save();
 
             $nombre = $request->input('nombre');
-            $empresa = $request->input('empresa');
-            $razon_social = $request->input('razon_social');
-            $documento = $request->input('documento');
             $email = $request->input('email');
-            $telefono = $request->input('telefono');
             $id = $request->input('id');
+            $plan = $request->input('descripcion') . ' (' . $id . ')';
             $dominio = $request->input('dominio');
             $cupon = $request->input('cupon');
         }
@@ -178,19 +175,15 @@ class ContratarController extends Controller
 
             $nombre = auth()->user()->name;
             $email = auth()->user()->email;
+            $password = null;
             $id = $request->input('id');
+            $plan = $request->input('descripcion') . ' (' . $id . ')';
             $dominio = $request->input('dominio');
             $cupon = $request->input('cupon');
-
-            $empresa = null;
-            $razon_social = null;
-            $documento = null;
-            $telefono = null;
-            $password = null;
         }
 
         
-        $email = new ContratarEnvio($nombre, $empresa, $razon_social, $documento, $email, $password, $telefono, $id, $dominio, $cupon);
+        $email = new ContratarEnvio($nombre, $email, $password, $plan, $dominio, $cupon);
 
         try
         {
@@ -200,7 +193,7 @@ class ContratarController extends Controller
         }
         catch (\Exception $e)
         {
-            return redirect()->route('contratar.create')->with('error', 'Se ha producido un error al querer crear el plan, por favor inténtalo más tarde. (' . $e->getMessage() . ')');
+            return redirect()->route('contratar.create', ['id' => $id])->with('error', 'Se ha producido un error al querer crear el plan, por favor inténtalo más tarde. (' . $e->getMessage() . ')');
         }
     }
 
