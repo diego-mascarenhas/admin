@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\GeneralCategory;
+use App\Models\CmsGeneralCategory;
 
 class EmailerController extends Controller
 {
     public function index()
     {
-        $planes = GeneralCategory::where('grupo', 515)
+        $planes = CmsGeneralCategory::where('grupo', 515)
             ->where('id_tipo', 4)
             ->where('estado', 3)
             ->orderBy('orden', 'ASC')

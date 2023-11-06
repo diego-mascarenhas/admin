@@ -93,7 +93,7 @@
 							@else
 							<li class="hidden-xs pull-right">
 									<a href="{{ route('dashboard') }}" style="float:left;"><i class="fa fa-sign-in margin-r-5"
-											aria-hidden="true"></i> Dashboard</a>
+											aria-hidden="true"></i> Mi Cuenta</a>
 								</li>
 							@endguest
 						</ul>

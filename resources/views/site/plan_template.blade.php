@@ -17,7 +17,7 @@
 	</span> <span class="iva"><small><em>+ I.V.A. por mes</em></small></span> </p>
 	@endif
 
-	@if (Route::currentRouteName() !== 'contratar')
+	@if (Route::currentRouteName() !== 'contratar.create')
 	<a href=" /contratar/{{ $item->id }}"
 				class="button button-medium margin-auto bc-red-4 margin-t-40">contratar</a>
 				@endif
