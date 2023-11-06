@@ -25,11 +25,14 @@
 
 			@if(session('error'))
 			<div class="col-md-12">
-				<div class="alert alert-danger" role="alert"> {{ session('error') }} </div>
+				<div class="alert alert-danger text-center" role="alert"> {{ session('error') }} </div>
 			</div>
 			@elseif(session('success'))
 			<div class="col-md-12">
-				<div class="alert alert-success" role="alert"> {{ session('success') }}</div>
+				<div class="alert alert-success text-center" role="alert"> {{ session('success') }}</div>
+				<p>
+					<a href="{{ route('dashboard') }}" class="button button-medium margin-auto bc-red-4 margin-t-40">Mi cuenta</a>
+				</p>
 			</div>
 			@endif
 

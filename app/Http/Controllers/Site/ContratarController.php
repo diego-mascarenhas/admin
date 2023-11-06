@@ -89,7 +89,7 @@ class ContratarController extends Controller
 
             // Iniciar sesión automáticamente
             event(new Registered($user));
-            auth()->login($user);
+            auth()->login($user, true); // Con el segundo parámetro se mantiene logueado
 
             // Crear contacto
             $contact = new CmsContact;
@@ -189,7 +189,7 @@ class ContratarController extends Controller
         {
             Mail::to('formularios@admin.revisionalpha.es')->send($email);
 
-            return redirect()->route('contratar.create', ['id' => $id])->with('success', 'Su plan ha sido dado de alta, en breve le estaremos enviando los accesos a su email');
+            return redirect()->route('contratar.create', ['id' => $id])->with('success', 'Su plan ha sido dado de alta, por favor verifique su casilla para validar su email');
         }
         catch (\Exception $e)
         {
