@@ -25,6 +25,7 @@ use App\Http\Controllers\Site\CloudController;
 use App\Http\Controllers\Site\EmailerController;
 use App\Http\Controllers\Site\ContratarController;
 use App\Http\Controllers\Site\ContactenosController;
+use App\Http\Controllers\Site\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -202,6 +203,8 @@ Route::post('/contratar', [ContratarController::class, 'store'])->name('contrata
 
 
 // CMS
+Route::get('/generate-pdf', [InvoiceController::class, 'generatePDF']);
+
 Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
 Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
 Route::post('/contacts', [UserController::class, 'store'])->name('contacts');
