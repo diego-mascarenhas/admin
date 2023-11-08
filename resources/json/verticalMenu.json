@@ -7,14 +7,6 @@
       "class": "waves-effect waves-cyan",
       "slug": "dashboard",
       "icon": "dashboard"
-    },
-    {
-      "url": "contacts",
-      "name": "Contacts",
-      "i18n": "Contacts",
-      "class": "waves-effect waves-cyan",
-      "icon": "person_outline",
-      "slug": "contacts"
     }
   ]
 }

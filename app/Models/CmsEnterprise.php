@@ -21,4 +21,5 @@ class CmsEnterprise extends Model
         'id_forma_pago',
         'id_factura_tipo'
     ];
+
 }

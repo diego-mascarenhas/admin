@@ -25,7 +25,7 @@ use App\Http\Controllers\Site\CloudController;
 use App\Http\Controllers\Site\EmailerController;
 use App\Http\Controllers\Site\ContratarController;
 use App\Http\Controllers\Site\ContactenosController;
-use App\Http\Controllers\Site\InvoiceController;
+use App\Http\Controllers\Cms\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ Auth::routes(['verify' => true]);
 
 // Dashboard Route
 // Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->name('dashboard');
+Route::get('/dashboard', [InvoiceController::class, 'index'])->name('dashboard');
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
 Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
@@ -203,6 +203,7 @@ Route::post('/contratar', [ContratarController::class, 'store'])->name('contrata
 
 
 // CMS
+Route::get('/cms-facturas', [InvoiceController::class, 'index']);
 Route::get('/generate-pdf', [InvoiceController::class, 'generatePDF']);
 
 Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
