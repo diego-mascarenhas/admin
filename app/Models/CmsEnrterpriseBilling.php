@@ -18,4 +18,14 @@ class CmsEnrterpriseBilling extends Model
         'razon_social',
         'cuit'
     ];
+
+    public static function getIdEnterpriseBillingFromIdEnterprise($id_empresa) {
+        $empresa_fiscal = self::where('id_empresa', $id_empresa)->first();
+
+        if ($empresa_fiscal) {
+            return $empresa_fiscal->id;
+        } else {
+            return null;
+        }
+    }
 }

@@ -26,12 +26,10 @@
         <span class="logo-text hide-on-med-and-down">
           @if(!empty ($configData['templateTitle']) && isset($configData['templateTitle']))
           {{$configData['templateTitle']}}
-          @else
-          Materialize
           @endif
         </span>
       </a>
-      <a class="navbar-toggler" href="javascript:void(0)"><i class="material-icons">radio_button_checked</i></a></h1>
+      <a class="navbar-toggler" href="javascript:void(0)"><i class="material-icons hide">radio_button_checked</i></a></h1>
   </div>
   <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"
     data-menu="menu-navigation" data-collapsible="menu-accordion">
