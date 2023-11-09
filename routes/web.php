@@ -205,7 +205,7 @@ Route::post('/contratar', [ContratarController::class, 'store'])->name('contrata
 // CMS
 Route::get('/cms-facturas', [InvoiceController::class, 'index']);
 Route::get('/cms-facturas/{id}', [InvoiceController::class, 'show']);
-Route::get('/generate-pdf', [InvoiceController::class, 'generatePDF']);
+Route::get('/cms-facturas-descargar/{id}', [InvoiceController::class, 'descargar']);
 
 Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
 Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');

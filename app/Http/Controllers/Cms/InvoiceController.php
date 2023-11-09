@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\CmsContact;
-use App\Models\CmsEnrterpriseBilling;
-use App\Models\CmsInvoice;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -71,16 +69,31 @@ class InvoiceController extends Controller
         return view('cms.app-invoice-view', ['factura' => $factura, 'items' => $items]);
     }
 
-    public function generatePDF()
+    public function descargar($id)
     {
-        $data = [
-            'title' => 'Welcome to revisionalpha.es',
-            'date' => date('m/d/Y')
-        ];
+        $factura = DB::table('facturas')
+        ->select('facturas.id', 'facturas.grupo', 'facturas.id_factura_tipo', 'facturas_tipo.id_afip', 'facturas_tipo.cuit AS afip_cuit', 'facturas.operacion', 'facturas.cae_numero', 'facturas.numero_talonario', 'facturas.numero_factura',
+        DB::raw("CONCAT(facturas_tipo.factura_tipo, ' ', lpad(facturas.numero_talonario, 4, '0'), '-', lpad(IF(facturas.numero_factura, facturas.numero_factura, '********'), 8, '0')) AS comprobante"),
+        'empresas_fiscales.id as id_empresa_fiscal', 'empresas_fiscales.razon_social', 'empresas_fiscales.cuit', 'facturas.fecha',
+        'facturas.vencimiento', 'facturas.bruto', 'facturas.descuento', 'facturas.total_neto', 'facturas.saldo',
+        'empresas.empresa', 'empresas.id as id_empresa', 'formas_pago.forma_pago', 'facturas.id_forma_pago', 'sys_monedas.simbolo', 'sys_monedas.codigo AS moneda_codigo', 'facturas.estado AS id_estado', 'facturas.error')
+            ->leftJoin('facturas_tipo', 'facturas.id_factura_tipo', '=', 'facturas_tipo.id')
+            ->leftJoin('empresas_fiscales', 'facturas.id_empresa_fiscal', '=', 'empresas_fiscales.id')
+            ->leftJoin('empresas', 'empresas_fiscales.id_empresa', '=', 'empresas.id')
+            ->leftJoin('sys_monedas', 'facturas.id_moneda', '=', 'sys_monedas.id')
+            ->leftJoin('formas_pago', 'facturas.id_forma_pago', '=', 'formas_pago.id')
+            ->where('facturas.id', $id)
+            ->first();
 
-        $pdf = Pdf::loadView('pdfs.factura_a_B16704934_exportacion', $data);
+        $items = DB::table('facturas_items')->select('facturas_items.id', 'facturas_items.id_categoria', 'facturas_items.descripcion', 'facturas_items.valor', 'facturas_items.descuento', 'facturas_tipo.impuesto', DB::raw('ROUND((facturas_items.valor-facturas_items.descuento)*facturas_tipo.impuesto/100+(facturas_items.valor-facturas_items.descuento), 2) AS total_neto'))
+            ->join('facturas', 'facturas_items.id_factura', '=', 'facturas.id')
+            ->join('facturas_tipo', 'facturas.id_factura_tipo', '=', 'facturas_tipo.id')
+            ->where('facturas_items.id_factura', $factura->id)
+            ->get();
 
-        return $pdf->download('revisionalpha-' . date('m/d/Y') . '.pdf');
+        $pdf = Pdf::loadView('pdfs.factura_a_B16704934', ['factura' => $factura, 'items' => $items]);
+
+        return $pdf->download('revisionalpha-' . $factura->comprobante . '.pdf');
     }
 
 

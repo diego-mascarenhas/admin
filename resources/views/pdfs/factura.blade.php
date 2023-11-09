@@ -1,18 +1,10 @@
-{{-- extend layout --}}
-@extends('layouts.contentLayoutMaster')
-
-{{-- page title --}}
-@section('title','Detalle de Factura' )
-
-{{-- page styles --}}
-@section('page-style')
-<link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-invoice.css')}}">
-@endsection
-
-{{-- page content --}}
-@section('content')
-<!-- app invoice View Page -->
-<section class="invoice-view-wrapper section">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>revision alpha - Factura</title>
+</head>
+<body>
+    <section class="invoice-view-wrapper section">
   <div class="row">
     <!-- invoice view page -->
     <div class="col xl9 m8 s12">
@@ -132,52 +124,7 @@
         </div>
       </div>
     </div>
-    <!-- invoice action  -->
-    <div class="col xl3 m4 s12">
-      <div class="card invoice-action-wrapper">
-        <div class="card-content">
-          {{--
-          <div class="invoice-action-btn">
-            <a href="#"
-              class="btn indigo waves-effect waves-light display-flex align-items-center justify-content-center">
-              <i class="material-icons mr-4">check</i>
-              <span class="text-nowrap">Send Invoice</span>
-            </a>
-          </div>
-          --}}
-          <div class="invoice-action-btn">
-            <a href="{{asset('cms-facturas-descargar')}}/{{ $factura->id }}" class="btn-block btn btn-light-indigo waves-effect waves-light">
-              <span>Descargar</span>
-            </a>
-          </div>
-          <div class="invoice-action-btn">
-            <a href="#" class="btn-block btn btn-light-indigo waves-effect waves-light invoice-print">
-              <span>Imprimir</span>
-            </a>
-          </div>
-          {{--
-          <div class="invoice-action-btn">
-            <a href="{{asset('app-invoice-edit')}}" class="btn-block btn btn-light-indigo waves-effect waves-light">
-              <span>Edit Invoice</span>
-            </a>
-          </div>
-          --}}
-          {{--
-          <div class="invoice-action-btn">
-            <a href="#" class="btn waves-effect waves-light display-flex align-items-center justify-content-center">
-              <i class="material-icons mr-3">attach_money</i>
-              <span class="text-nowrap">Add Payment</span>
-            </a>
-          </div>
-          --}}
-        </div>
-      </div>
-    </div>
   </div>
 </section>
-@endsection
-
-{{-- page scripts --}}
-@section('page-script')
-<script src="{{asset('js/scripts/app-invoice.js')}}"></script>
-@endsection
+</body>
+</html>

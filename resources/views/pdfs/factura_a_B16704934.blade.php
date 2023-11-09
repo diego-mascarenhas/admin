@@ -2,6 +2,26 @@
 <html>
 <head>
     <title>revision alpha S.L.</title>
+	<style>
+		body {
+			max-width: 21cm;
+			max-height: 29.7cm;
+			margin: 40;
+		}
+
+		#wrap > table td { vertical-align:top; }
+
+		p, td, th { font-size:12px; line-height:1.5; }
+		h2 { font-size:20px; }
+		h3 { font-size:14px; }
+
+		.table-info { border:1px solid #DDD; border-radius:5px; }
+		.table-info td, .table-info th { padding:8px 12px; }
+
+		.table-detalle {  }
+		.table-detalle td, .table-detalle th { padding:8px 12px; }
+		.table-detalle th { border-left:1px solid #DDD; border-top:1px solid #DDD; border-bottom:1px solid #DDD; }
+	</style>
 </head>
 <body>
 <style type="text/css">
@@ -33,25 +53,25 @@
 								</td>
 								<td style="width:100px;">&nbsp;</td>
 								<td style="width:328px;">
-									<h2>FACTURA N&deg; <?php //echo $_POST['numero_talonario']; ?>-<?php //echo $_POST['numero_factura']; ?></h2>
-									<h3><?php //if ( !empty( $_POST['vencimiento'] ) ) : ?>
-											VTO: <?php //echo $_POST['vencimiento']; ?>
-										<?php //else : ?>
+									<h2>FACTURA N&deg; {{ $factura->comprobante }}</h2>
+									<h3>@if($factura->vencimiento)
+											VTO: {{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y') }}
+										@else
 											&nbsp;
-										<?php //endif; ?>
+										@endif
 									</h3><br>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<p>revision alpha S.L.<br>
-									González Besada 39 Of. 4º B, Oviedo,<br>
-									Asturias España<br>
-									+34 722 372 858</p>
+									González Besada 39 Of. 4º B, 33007
+									Oviedo, Principado de Asturias, España.<br>
+									+34 722.372.858</p>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<p><strong>Fecha:</strong> <?php //echo $_POST['fecha']; ?><br>
+									<p><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y') }}<br>
 									<strong>NIF:</strong> 16704934<br>
 								</td>
 							</tr>
@@ -73,28 +93,10 @@
 						<tbody>
 							<tr>
 								<td style="width:520px;">
-									<?php //  if ( $_POST['id_documento_tipo'] != 96 ) : ?>
-									<p><strong>Raz&oacute;n Social:</strong> <?php //  echo $_POST['razon_social']; ?><br>
-									<?php //  else : ?>
-									<p><strong>Nombre y Apellido:</strong> <?php //  echo $_POST['razon_social']; ?><br>
-									<?php //  endif; ?>
-									<?php //  if ( !empty( $_POST['domicilio'] ) ) : ?>
-									<strong>Domicilio:</strong> <?php //  echo $_POST['domicilio']; ?><br>
-									<?php //  endif; ?>
-									<strong>IVA:</strong> <?php //  echo $_POST['condicion_iva']; ?></p>
+									<p><strong>Raz&oacute;n Social:</strong> {{ $factura->razon_social }}<br>
 								</td>
-								<td style="width:160px; padding-left:0; text-align:right">
-									<p><br>
-									<?php //  if ( !empty( $_POST['domicilio'] ) ) : ?>
-									<br>
-									<?php //  endif; ?>
-									<?php //  if ( !empty( $_POST['documento_numero'] ) ) : ?>
-										<?php //  if ( $_POST['id_documento_tipo'] != 96 ) : ?>
-										<strong>CUIT:</strong> <?php //  echo $_POST['documento_numero']; ?>
-										<?php //  elseif ( $_POST['id_documento_tipo'] != 80 ) : ?>
-										<strong>DNI:</strong> <?php //  echo $_POST['documento_numero']; ?>
-										<?php //  endif; ?>
-									<?php //  endif; ?>
+								<td style="width:144px; padding-left:0; text-align:right">
+									<p><strong>NIF:</strong> {{ $factura->cuit }}
 									</p>
 								</td>
 							</tr>
@@ -106,7 +108,7 @@
 			<tr><td height="20"></td></tr>
 
 			<tr>
-				<td style="height:585px;">
+				<td style="height:535px;">
 					<table cellspacing="0" class="table-detalle">
 						<thead>
 							<tr>
@@ -115,16 +117,36 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php //  foreach (json_decode($_POST['items']) as $item) { ?>
+							@foreach($items as $item)
 							<tr>
-								<td align="left"><div style="width:520px;"><?php //  echo $item->descripcion; ?></div></td>
-								<td align="right">$<?php //  echo number_format( $item->valor+($item->valor*$item->impuesto)/100 , 2, ',', '.' ); ?></td>
+								<td align="left"><div style="width:520px;">{{ $item->descripcion }}</div></td>
+								<td align="right">{{ $item->valor }}€</td>
 							</tr>
-							<?php //  } ?>
+							@endforeach
 						</tbody>
 					</table>
 				</td>
 			</tr> <!-- FIN Detalle -->
+
+			<tr>
+				<td style="height:50px;">
+					<table cellspacing="0" class="table-detalle">
+						<tbody>
+							<tr>
+								<td>
+									<div style="width:756px; line-height:1.2;">
+										<em>
+											Transferencias:<br>
+											Banco Caja Rural de Asturias<br>
+											IBAN ES46 3059 0064 7733 1011 2929
+										</em>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr> <!-- FIN Observaciones -->
 
 			<tr>
 				<td>
@@ -137,17 +159,21 @@
 											<tr>
 												<td style="width:545px;" align="right">
 													<p><strong>Subtotal:</strong><br>
-													<?php //  if ( $_POST['descuento'] > 0 ) : ?>
-													<strong>Descuento:</strong><br>
-													<?php //  endif; ?>
+													@if($factura->descuento > 0)
+														<strong>Descuento:</strong><br>
+														<strong>Subtotal con descuento:</strong><br>
+													@endif
+													<strong>IVA:</strong><br>
 													<strong>Importe Total:</strong></p>
 												</td>
 												<td style="width:112px;" align="right">
-													<p>$<?php //  echo number_format( $_POST['bruto']+($_POST['bruto']*$_POST['impuesto'])/100, 2, ',', '.' ); ?><br>
-													<?php //  if ( $_POST['descuento'] > 0 ) : ?>
-													$<?php //  echo number_format( $_POST['descuento']+($_POST['descuento']*$_POST['impuesto'])/100, 2, ',', '.' ); ?><br>
-													<?php //  endif; ?>
-													$<?php //  echo number_format( $_POST['total_neto'], 2, ',', '.' ); ?></p>
+													<p>{{ $factura->bruto }}€<br>
+													@if($factura->descuento > 0)
+														{{ $factura->descuento }}€<br>
+														{{ $factura->descuento }}€<br>
+													@endif
+													21%<br>
+													{{ $factura->total_neto }}€</p>
 												</td>
 											</tr>
 										</tbody>
