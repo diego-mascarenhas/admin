@@ -35,25 +35,22 @@
     <![endif]-->
 
 <!-- Scripts -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-6047944-1"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S9CDKJNG6Q"></script>
 <script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() { dataLayer.push(arguments); }
-	gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-	gtag('config', 'UA-6047944-1');
+  gtag('config', 'G-S9CDKJNG6Q');
 </script>
 
 <!-- Google Tag Manager -->
-<script>(function (w, d, s, l, i) {
-		w[l] = w[l] || []; w[l].push({
-			'gtm.start':
-				new Date().getTime(), event: 'gtm.js'
-		}); var f = d.getElementsByTagName(s)[0],
-			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-				'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-	})(window, document, 'script', 'dataLayer', 'GTM-WHZXZH9');</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PPMG3NK3');</script>
 <!-- End Google Tag Manager -->
 
 <script src="/assets/js/jquery-3.1.1.min.js"></script>
@@ -63,8 +60,7 @@
 
 <body>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHZXZH9" height="0" width="0"
-			style="display:none;visibility:hidden"></iframe></noscript>
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PPMG3NK3" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 
 	<div id="mainContainer" class="has-sticky-footer">
