@@ -37,7 +37,7 @@ class ComposerStaticInit68bdc2e6b7fd2a2247f9d67b308c8ec5
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        'd21d43db5f6e840ee7b10744ec7fdf66' => __DIR__ . '/../..' . '/app/Helpers/helpers.php',
+        '8fde5feda9697fe0ee53a3938c839fb0' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -640,6 +640,7 @@ class ComposerStaticInit68bdc2e6b7fd2a2247f9d67b308c8ec5
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Helpers\\Helper' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
         'App\\Http\\Controllers\\AdvanceUiController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdvanceUiController.php',
         'App\\Http\\Controllers\\ApplicationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApplicationController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -653,6 +654,7 @@ class ComposerStaticInit68bdc2e6b7fd2a2247f9d67b308c8ec5
         'App\\Http\\Controllers\\BasicUiController' => __DIR__ . '/../..' . '/app/Http/Controllers/BasicUiController.php',
         'App\\Http\\Controllers\\CardController' => __DIR__ . '/../..' . '/app/Http/Controllers/CardController.php',
         'App\\Http\\Controllers\\ChartController' => __DIR__ . '/../..' . '/app/Http/Controllers/ChartController.php',
+        'App\\Http\\Controllers\\Cms\\InvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Cms/InvoiceController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CssController' => __DIR__ . '/../..' . '/app/Http/Controllers/CssController.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
@@ -669,7 +671,6 @@ class ComposerStaticInit68bdc2e6b7fd2a2247f9d67b308c8ec5
         'App\\Http\\Controllers\\Site\\ContratarController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/ContratarController.php',
         'App\\Http\\Controllers\\Site\\EmailerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/EmailerController.php',
         'App\\Http\\Controllers\\Site\\HostingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/HostingController.php',
-        'App\\Http\\Controllers\\Site\\InvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/InvoiceController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserProfileController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

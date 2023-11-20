@@ -1,7 +1,8 @@
-<?php // Code within app\Helpers\Helper.php
+<?php
+
 namespace App\Helpers;
+
 use Config;
-use Illuminate\Support\Str;
 
 class Helper
 {
@@ -24,10 +25,10 @@ class Helper
             'isFooterFixed' => false,
             'templateTitle' => '',
             'isCustomizer' => true,
-            'defaultLanguage'=>'en',
+            'defaultLanguage' => 'en',
             'largeScreenLogo' => 'images/logo/materialize-logo-color.png',
             'smallScreenLogo' => 'images/logo/materialize-logo.png',
-            'isFabButton'=>false, 
+            'isFabButton' => false,
             'direction' => env('MIX_CONTENT_DIRECTION', 'ltr'),
         ];
         // if any key missing of array from custom.php file it will be merge and set a default value from dataDefault array and store in data variable
@@ -41,38 +42,51 @@ class Helper
             'isNavbarFixed' => array(true, false),
             'isMenuDark' => array(null, true, false),
             'isMenuCollapsed' => array(true, false),
-            'activeMenuType' => array('sidenav-active-square'=>'sidenav-active-square', 'sidenav-active-rounded'=>'sidenav-active-rounded', 'sidenav-active-fullwidth'=>'sidenav-active-fullwidth'),
+            'activeMenuType' => array('sidenav-active-square' => 'sidenav-active-square', 'sidenav-active-rounded' => 'sidenav-active-rounded', 'sidenav-active-fullwidth' => 'sidenav-active-fullwidth'),
             'isFooterDark' => array(null, true, false),
             'isFooterFixed' => array(false, true),
             'isCustomizer' => array(true, false),
-            'isFabButton'=> array(false, true), 
-            'defaultLanguage'=>array('en'=>'en','es'=>'es','fr'=>'fr','de'=>'de','pt'=>'pt'),
-            'direction' => array('ltr'=>'ltr', 'rtl'=>'rtl'),
+            'isFabButton' => array(false, true),
+            'defaultLanguage' => array('en' => 'en', 'es' => 'es', 'fr' => 'fr', 'de' => 'de', 'pt' => 'pt'),
+            'direction' => array('ltr' => 'ltr', 'rtl' => 'rtl'),
         ];
         //if any options value empty or wrong in custom.php config file then set a default value
-        foreach ($allOptions as $key => $value) {
-            if (gettype($data[$key]) === gettype($dataDefault[$key])) {
-                if (is_string($data[$key])) {
+        foreach ($allOptions as $key => $value)
+        {
+            if (gettype($data[$key]) === gettype($dataDefault[$key]))
+            {
+                if (is_string($data[$key]))
+                {
                     $result = array_search($data[$key], $value);
-                    if (empty($result)) {
+                    if (empty($result))
+                    {
                         $data[$key] = $dataDefault[$key];
                     }
                 }
-            } else {
-                if (is_string($dataDefault[$key])) {
+            }
+            else
+            {
+                if (is_string($dataDefault[$key]))
+                {
                     $data[$key] = $dataDefault[$key];
-                } elseif (is_bool($dataDefault[$key])) {
+                }
+                elseif (is_bool($dataDefault[$key]))
+                {
                     $data[$key] = $dataDefault[$key];
-                } elseif (is_null($dataDefault[$key])) {
+                }
+                elseif (is_null($dataDefault[$key]))
+                {
                     is_string($data[$key]) ? $data[$key] = $dataDefault[$key] : '';
                 }
             }
         }
         // if any of template logo is not set or empty is set to default logo
-        if (empty($data['largeScreenLogo'])) {
+        if (empty($data['largeScreenLogo']))
+        {
             $data['largeScreenLogo'] = $dataDefault['largeScreenLogo'];
         }
-        if (empty($data['smallScreenLogo'])) {
+        if (empty($data['smallScreenLogo']))
+        {
             $data['smallScreenLogo'] = $dataDefault['smallScreenLogo'];
         }
         //mainLayoutTypeClass array contain default class of body element
@@ -173,14 +187,15 @@ class Helper
             'isCustomizer' => $data['isCustomizer'],
             'largeScreenLogo' => $data['largeScreenLogo'],
             'smallScreenLogo' => $data['smallScreenLogo'],
-            'defaultLanguage'=>$allOptions['defaultLanguage'][$data['defaultLanguage']],
+            'defaultLanguage' => $allOptions['defaultLanguage'][$data['defaultLanguage']],
             'mainFooterClass' => $mainFooterClass[$data['mainLayoutType']],
             'mainFooterColor' => $mainFooterColor[$data['mainLayoutType']],
-            'isFabButton'=>$data['isFabButton'],
+            'isFabButton' => $data['isFabButton'],
             'direction' => $data['direction'],
         ];
-         // set default language if session hasn't locale value the set default language
-         if(!session()->has('locale')){
+        // set default language if session hasn't locale value the set default language
+        if (!session()->has('locale'))
+        {
             app()->setLocale($layoutClasses['defaultLanguage']);
         }
         return $layoutClasses;
@@ -190,9 +205,12 @@ class Helper
     {
         $demo = 'custom';
         $custom = 'custom';
-        if (isset($pageConfigs)) {
-            if (count($pageConfigs) > 0) {
-                foreach ($pageConfigs as $config => $val) {
+        if (isset($pageConfigs))
+        {
+            if (count($pageConfigs) > 0)
+            {
+                foreach ($pageConfigs as $config => $val)
+                {
                     Config::set($demo . '.' . $custom . '.' . $config, $val);
                 }
             }

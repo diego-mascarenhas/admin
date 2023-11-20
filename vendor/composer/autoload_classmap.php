@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Helpers\\Helper' => $baseDir . '/app/Helpers/Helper.php',
     'App\\Http\\Controllers\\AdvanceUiController' => $baseDir . '/app/Http/Controllers/AdvanceUiController.php',
     'App\\Http\\Controllers\\ApplicationController' => $baseDir . '/app/Http/Controllers/ApplicationController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -21,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\BasicUiController' => $baseDir . '/app/Http/Controllers/BasicUiController.php',
     'App\\Http\\Controllers\\CardController' => $baseDir . '/app/Http/Controllers/CardController.php',
     'App\\Http\\Controllers\\ChartController' => $baseDir . '/app/Http/Controllers/ChartController.php',
+    'App\\Http\\Controllers\\Cms\\InvoiceController' => $baseDir . '/app/Http/Controllers/Cms/InvoiceController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CssController' => $baseDir . '/app/Http/Controllers/CssController.php',
     'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
@@ -37,7 +39,6 @@ return array(
     'App\\Http\\Controllers\\Site\\ContratarController' => $baseDir . '/app/Http/Controllers/Site/ContratarController.php',
     'App\\Http\\Controllers\\Site\\EmailerController' => $baseDir . '/app/Http/Controllers/Site/EmailerController.php',
     'App\\Http\\Controllers\\Site\\HostingController' => $baseDir . '/app/Http/Controllers/Site/HostingController.php',
-    'App\\Http\\Controllers\\Site\\InvoiceController' => $baseDir . '/app/Http/Controllers/Site/InvoiceController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\UserProfileController' => $baseDir . '/app/Http/Controllers/UserProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

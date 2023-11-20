@@ -400,3 +400,7 @@ FodyWeavers.xsd
 # Admin
 .env
 .nova/*
+
+vendor/
+storage/
+composer.lock
