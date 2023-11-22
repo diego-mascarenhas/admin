@@ -139,7 +139,7 @@
 									<td>
 										<p><strong>Fecha:</strong> {{
 											\Carbon\Carbon::parse($factura->fecha)->format('d/m/Y') }}<br>
-											<strong>NIF:</strong> 16704934<br>
+											<strong>NIF:</strong> B16704934<br>
 									</td>
 								</tr>
 								<tr>
