@@ -210,9 +210,10 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('/cms-facturas', [InvoiceController::class, 'index']);
     Route::get('/cms-facturas/{id}', [InvoiceController::class, 'show']);
-    Route::get('/cms-facturas-descargar/{id}', [InvoiceController::class, 'descargar']);
 
     Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
     Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
     Route::post('/contacts', [UserController::class, 'store'])->name('contacts');
 });
+
+Route::get('/cms-facturas-download/{hash}', [InvoiceController::class, 'download']);

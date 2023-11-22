@@ -108,7 +108,7 @@
                     <span class="invoice-subtotal-title">Subtotal</span>
                     <h6 class="invoice-subtotal-value">{{ $factura->bruto }}€</h6>
                   </li>
-                  
+
                   @if($factura->descuento > 0)
                   <li class="display-flex justify-content-between">
                     <span class="invoice-subtotal-title">Descuento</span>
@@ -117,8 +117,14 @@
                   @endif
 
                   <li class="display-flex justify-content-between">
-                    <span class="invoice-subtotal-title">I.V.A.</span>
-                    <h6 class="invoice-subtotal-value">21%</h6>
+                    <span class="invoice-subtotal-title">I.V.A. 21%</span>
+                    <h6 class="invoice-subtotal-value">
+                      @if($factura->descuento > 0)
+                      {{ number_format($factura->bruto - ($factura->descuento * 0.21), 2) }}€
+                      @else
+                      {{ number_format($factura->bruto * 0.21, 2) }}€
+                      @endif
+                    </h6>
                   </li>
                   <li class="divider mt-2 mb-2"></li>
                   <li class="display-flex justify-content-between">
@@ -146,7 +152,8 @@
           </div>
           --}}
           <div class="invoice-action-btn">
-            <a href="{{asset('cms-facturas-descargar')}}/{{ $factura->id }}" class="btn-block btn btn-light-indigo waves-effect waves-light">
+            <a href="{{asset('cms-facturas-download')}}/{{ $factura->hash }}"
+              class="btn-block btn btn-light-indigo waves-effect waves-light">
               <span>Descargar</span>
             </a>
           </div>
