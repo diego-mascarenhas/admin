@@ -163,10 +163,18 @@
 							<tbody>
 								<tr>
 									<td style="width:520px;">
-										<p><strong>Raz&oacute;n Social:</strong> {{ $factura->razon_social }}<br>
+										<p>
+											<strong>Raz&oacute;n Social:</strong> {{ $factura->razon_social }}<br>
+											@if($factura->domicilio)
+											{{ $factura->domicilio }},
+											{{ $factura->codigo_postal ?? '' }},
+											{{ $factura->localidad ?? '' }},
+											{{ $factura->provincia ?? '' }}, {{ $factura->pais ?? '' }}.
+											@endif
+										</p>
 									</td>
 									<td style="width:144px; padding-left:0; text-align:right">
-										<p><strong>NIF:</strong> {{ $factura->cuit }}
+										<p><strong>NIF/CIF:</strong> {{ $factura->cuit }}
 										</p>
 									</td>
 								</tr>

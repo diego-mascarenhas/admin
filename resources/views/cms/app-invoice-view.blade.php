@@ -60,15 +60,27 @@
                 <span>NIF: B16704934</span>
               </div>
               <div class="invoice-address">
-                <span>González Besada 39, Oviedo, Asturias</span>
+                <span>González Besada 39,</span>
+              </div>
+              <div class="invoice-address">
+                <span>Oviedo, Asturias, España</span>
               </div>
             </div>
             <div class="col m6 s12">
               <div class="divider show-on-small hide-on-med-and-up mb-3"></div>
               <h6 class="invoice-to">{{ $factura->razon_social }}</h6>
               <div class="invoice-address">
-                <span>NIF: {{ $factura->cuit }}</span>
+                <span>NIF/CIF: {{ $factura->cuit }}</span>
               </div>
+              @if($factura->domicilio)
+              <div class="invoice-address">
+                <span>{{ $factura->domicilio }},</span>
+              </div>
+              <div class="invoice-address">
+                <span>{{ $factura->localidad ?? '' }}, {{ $factura->provincia ?? '' }}, {{ $factura->pais ?? ''
+                  }}</span>
+              </div>
+              @endif
             </div>
           </div>
           <div class="divider mb-3 mt-3"></div>
