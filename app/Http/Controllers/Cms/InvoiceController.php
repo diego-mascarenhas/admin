@@ -36,6 +36,7 @@ class InvoiceController extends Controller
             ->leftJoin('sys_monedas', 'facturas.id_moneda', '=', 'sys_monedas.id')
             ->leftJoin('formas_pago', 'facturas.id_forma_pago', '=', 'formas_pago.id')
             ->where('empresas.id', $id_empresa)
+            ->where('facturas.estado', 2)
             ->get();
 
         return view('cms.app-invoice-list', ['facturas' => $facturas]);
