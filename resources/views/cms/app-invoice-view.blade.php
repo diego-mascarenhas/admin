@@ -60,15 +60,27 @@
                 <span>NIF: B16704934</span>
               </div>
               <div class="invoice-address">
-                <span>González Besada 39, Oviedo, Asturias</span>
+                <span>González Besada 39,</span>
+              </div>
+              <div class="invoice-address">
+                <span>Oviedo, Asturias, España</span>
               </div>
             </div>
             <div class="col m6 s12">
               <div class="divider show-on-small hide-on-med-and-up mb-3"></div>
               <h6 class="invoice-to">{{ $factura->razon_social }}</h6>
               <div class="invoice-address">
-                <span>NIF: {{ $factura->cuit }}</span>
+                <span>NIF/CIF: {{ $factura->cuit }}</span>
               </div>
+              @if($factura->domicilio)
+              <div class="invoice-address">
+                <span>{{ $factura->domicilio }},</span>
+              </div>
+              <div class="invoice-address">
+                <span>{{ $factura->localidad ?? '' }}, {{ $factura->provincia ?? '' }}, {{ $factura->pais ?? ''
+                  }}</span>
+              </div>
+              @endif
             </div>
           </div>
           <div class="divider mb-3 mt-3"></div>
@@ -108,7 +120,7 @@
                     <span class="invoice-subtotal-title">Subtotal</span>
                     <h6 class="invoice-subtotal-value">{{ $factura->bruto }}€</h6>
                   </li>
-                  
+
                   @if($factura->descuento > 0)
                   <li class="display-flex justify-content-between">
                     <span class="invoice-subtotal-title">Descuento</span>
@@ -117,8 +129,14 @@
                   @endif
 
                   <li class="display-flex justify-content-between">
-                    <span class="invoice-subtotal-title">I.V.A.</span>
-                    <h6 class="invoice-subtotal-value">21%</h6>
+                    <span class="invoice-subtotal-title">I.V.A. 21%</span>
+                    <h6 class="invoice-subtotal-value">
+                      @if($factura->descuento > 0)
+                      {{ number_format($factura->bruto - ($factura->descuento * 0.21), 2) }}€
+                      @else
+                      {{ number_format($factura->bruto * 0.21, 2) }}€
+                      @endif
+                    </h6>
                   </li>
                   <li class="divider mt-2 mb-2"></li>
                   <li class="display-flex justify-content-between">
@@ -146,7 +164,8 @@
           </div>
           --}}
           <div class="invoice-action-btn">
-            <a href="{{asset('cms-facturas-descargar')}}/{{ $factura->id }}" class="btn-block btn btn-light-indigo waves-effect waves-light">
+            <a href="{{asset('cms-facturas-download')}}/{{ $factura->hash }}"
+              class="btn-block btn btn-light-indigo waves-effect waves-light">
               <span>Descargar</span>
             </a>
           </div>

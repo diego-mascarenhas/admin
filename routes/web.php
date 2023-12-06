@@ -42,7 +42,6 @@ Auth::routes(['verify' => true]);
 
 // Dashboard Route
 // Route::get('/dashboard', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/dashboard', [InvoiceController::class, 'index'])->name('dashboard');
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
 Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
@@ -197,16 +196,24 @@ Route::view('/sla', '/site/sla');
 Route::view('/contactenos', '/site/contactenos')->name('contactenos');
 Route::post('/contactenos', [ContactenosController::class, 'store'])->name('enviar.email');
 
-Route::get('/contratar', function () { return redirect()->back(); });
+Route::get('/contratar', function ()
+{
+    return redirect()->back();
+});
 Route::get('/contratar/{id}', [ContratarController::class, 'create'])->name('contratar.create');
 Route::post('/contratar', [ContratarController::class, 'store'])->name('contratar.store');
 
+// CMS+
+Route::middleware(['auth'])->group(function ()
+{
+    Route::get('/dashboard', [InvoiceController::class, 'index'])->name('dashboard');
 
-// CMS
-Route::get('/cms-facturas', [InvoiceController::class, 'index']);
-Route::get('/cms-facturas/{id}', [InvoiceController::class, 'show']);
-Route::get('/cms-facturas-descargar/{id}', [InvoiceController::class, 'descargar']);
+    Route::get('/cms-facturas', [InvoiceController::class, 'index']);
+    Route::get('/cms-facturas/{id}', [InvoiceController::class, 'show']);
 
-Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
-Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
-Route::post('/contacts', [UserController::class, 'store'])->name('contacts');
+    Route::get('/contacts', [UserController::class, 'index'])->name('contacts');
+    Route::post('/contacts/datatable', [UserController::class, 'datatable'])->name('contacts');
+    Route::post('/contacts', [UserController::class, 'store'])->name('contacts');
+});
+
+Route::get('/cms-facturas-download/{hash}', [InvoiceController::class, 'download']);
