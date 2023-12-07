@@ -18,9 +18,11 @@ class InvoiceNewSend extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    protected $id;
+
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
@@ -52,11 +54,7 @@ class InvoiceNewSend extends Mailable
             ->leftJoin('sys_monedas', 'facturas.id_moneda', '=', 'sys_monedas.id')
             ->leftJoin('formas_pago', 'facturas.id_forma_pago', '=', 'formas_pago.id')
             ->leftJoin('contactos', 'empresas.id_contacto', '=', 'contactos.id')
-            //->where('facturas.grupo', env('CMSGROUP'))
-            //->where('facturas.operacion', 'V')
-            //->where('facturas.estado', 2)
-            //->whereNull('facturas.enviado')
-            //->where('facturas.saldo', '>', 0)
+            ->where('facturas.id', $this->id)
             ->first();
 
         if (!$factura)
@@ -68,7 +66,7 @@ class InvoiceNewSend extends Mailable
 
         return $this->view('emails.invoice_new', ['factura' => $factura])
             ->subject('Nueva Factura ' . $factura->comprobante)
-            ->from('formularios@admin.revisionalpha.es', 'revision alpha')
+            ->from('info@revisionalpha.es', 'revision alpha')
             ->replyTo('diego@revisionalpha.es', 'Diego Mascarenhas Goytía');
     }
 }
