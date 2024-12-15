@@ -3,25 +3,29 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\CmsGeneralCategory;
+use App\Services\StripeService;
+use Illuminate\Support\Facades\Log;
 
 class HostingController extends Controller
 {
+    protected $stripeService;
+
+    public function __construct(StripeService $stripeService)
+    {
+        $this->stripeService = $stripeService;
+    }
+
     public function index()
     {
-        $planes = CmsGeneralCategory::where('grupo', 515)
-            ->where('id_tipo', 1)
-            ->where('estado', 3)
-            ->orderBy('orden', 'ASC')
-            ->take(3)
-            ->get();
+        try {
+            $planes = $this->stripeService->getPlans();
 
-        foreach ($planes as $plan)
-        {
-            $plan->caracteristicas = json_decode($plan->caracteristicas, true);
+            return view('site.hosting', [
+                'planes' => $planes->data
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error en HostingController: ' . $e->getMessage());
+            return back()->with('error', 'No se pudieron cargar los planes.');
         }
-
-        return view('site.hosting', ['planes' => $planes]);
     }
 }

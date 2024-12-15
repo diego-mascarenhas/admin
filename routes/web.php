@@ -26,6 +26,7 @@ use App\Http\Controllers\Site\EmailerController;
 use App\Http\Controllers\Site\ContratarController;
 use App\Http\Controllers\Site\ContactenosController;
 use App\Http\Controllers\Cms\InvoiceController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -217,3 +218,7 @@ Route::middleware(['auth'])->group(function ()
 });
 
 Route::get('/cms-facturas-download/{hash}', [InvoiceController::class, 'download']);
+
+Route::post('/create-checkout-session', [CheckoutController::class, 'create'])->name('checkout.create');
+Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');

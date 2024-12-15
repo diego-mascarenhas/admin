@@ -64,27 +64,75 @@
 </div>
 
 <div class="hosting-planes margin-b-50">
-	<h2 class="section-title margin-b-50"><span>Nuestros planes</span></h2>
-	<div class="container-fluid">
-		<div class="row">
-			@foreach ($planes as $item)
-			<div class="col col-md-4">
-				<div class="planCommon">
-					@include('site/plan_template')
-				</div>
-			</div>
-			@endforeach
-		</div>
-	</div>
+    <h2 class="section-title margin-b-50"><span>Nuestros planes</span></h2>
+    <div class="container-fluid">
+        <div class="row">
+            @php
+                $productosAgrupados = collect($planes)
+                    ->groupBy(function($plan) {
+                        return $plan->product->id;
+                    })
+                    ->sortBy(function($planes_producto) {
+                        return $planes_producto->min('unit_amount');
+                    });
+            @endphp
+
+            @foreach ($productosAgrupados as $planes_producto)
+                @php
+                    $producto = $planes_producto->first()->product;
+                @endphp
+
+                <div class="col col-md-4">
+                    <ul>
+                        <li class="bc-{{ $producto->metadata->color ?? 'red' }}-5">
+                            <h3>{{ $producto->name }}</h3>
+                        </li>
+                        <li>
+                            <p>{{ $producto->metadata->storage ?? '30' }} GB de espacio</p>
+                            <p>{{ $producto->metadata->transfer ?? '5' }} GB de transferencia mensual</p>
+                            <p>{{ $producto->metadata->emails ?? '1' }} Cuenta{{ $producto->metadata->emails > 1 ? 's' : '' }} de emails</p>
+                            <p>Panel de control cPanel</p>
+                            <p>Backups semanales</p>
+                            <p>Certificado SSL</p>
+                            <p>{{ $producto->metadata->credits ?? '500' }} créditos email-Marketing mensuales</p>
+
+                            @foreach ($planes_producto->sortBy('unit_amount') as $plan)
+                                <p class="price">
+                                    <span class="tc-{{ $producto->metadata->color ?? 'red' }}-5">
+                                        <strong>{{ number_format($plan->unit_amount / 100, 2) }}€</strong>
+                                    </span>
+                                    <span class="iva">
+                                        <small>
+                                            <em>+ I.V.A. por mes{{ isset($plan->metadata->billing_period) && $plan->metadata->billing_period === 'year' ? ' con pago anual' : '' }}</em>
+                                        </small>
+                                    </span>
+                                </p>
+
+                                @if(Route::currentRouteName() !== 'contratar.create')
+                                    <form action="/create-checkout-session" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="price_id" value="{{ $plan->id }}">
+                                        <button type="submit"
+                                                class="button button-medium margin-auto bc-{{ $producto->metadata->color ?? 'red' }}-4 margin-t-40">
+                                            contratar
+                                        </button>
+                                    </form>
+                                @endif
+                            @endforeach
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 <div class="hosting-sctc">
-	<div class="sctcCommon">
-		<h4>¿No sabes qué plan elegir?</h4>
-		<p>Contacta un asesor online que te va a asesorar en el plan indicado para tu proyecto.</p>
-		<a href="https://wa.me/34722372858?text=Hola quisiera consultar por" target="_blank"
-			title="Contacta por Whatsapp" class="button button-medium margin-auto bc-blue-5 margin-t-30">Contactar</a>
-	</div>
+    <div class="sctcCommon">
+        <h4>¿No sabes qué plan elegir?</h4>
+        <p>Contacta un asesor online que te va a asesorar en el plan indicado para tu proyecto.</p>
+        <a href="#" class="button button-medium margin-auto bc-blue-5 margin-t-30">CONTACTAR</a>
+    </div>
 </div>
 </section>
 </div>

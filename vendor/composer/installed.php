@@ -3,7 +3,7 @@
         'name' => 'revision-alpha/website',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '912dd4489d16061e760ab8830d84da4cb938cf87',
+        'reference' => 'b85323117ffcd7c68114d4af7736b3d6bf8e1de4',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -1028,7 +1028,7 @@
         'revision-alpha/website' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '912dd4489d16061e760ab8830d84da4cb938cf87',
+            'reference' => 'b85323117ffcd7c68114d4af7736b3d6bf8e1de4',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
