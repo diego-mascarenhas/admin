@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\MenuServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Fruitcake\Cors\CorsServiceProvider::class,
     ],
 
     /*
