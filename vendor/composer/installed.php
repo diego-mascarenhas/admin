@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'laravel/laravel',
+        'name' => 'revision-alpha/website',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '55560a86667cb45c996b962207b20120d06a5a1a',
+        'reference' => '912dd4489d16061e760ab8830d84da4cb938cf87',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -454,15 +454,6 @@
             'reference' => 'dcfa130ede1a6fa4343dc113410963e791ad34fb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/framework',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'laravel/laravel' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '55560a86667cb45c996b962207b20120d06a5a1a',
-            'type' => 'project',
-            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -1034,6 +1025,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'revision-alpha/website' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '912dd4489d16061e760ab8830d84da4cb938cf87',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'rhumsaa/uuid' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -1189,6 +1189,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v16.3.0',
+            'version' => '16.3.0.0',
+            'reference' => '48af6bc64ca8157b3fdce100e856069963bac466',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/clock' => array(
             'pretty_version' => 'v7.2.0',
