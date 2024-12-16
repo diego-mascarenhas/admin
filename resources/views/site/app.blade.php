@@ -9,16 +9,16 @@
     <meta name="keywords" content="Hosting, Auditoría, Consultoría y Desarrollo Web, Marketing Digital" />
     <meta property="og:title" content="revision alpha" />
     <meta property="og:url" content="{{ url('/') }}" />
-    <meta property="og:description" content="Soluciones en Tecnología y Conectividad">	
+    <meta property="og:description" content="Soluciones en Tecnología y Conectividad">
     <meta property="og:image" content="/assets/img/logo-wa.png">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/logo-wa.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/logo-wa.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/logo-wa.png"> 
-    
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/logo-wa.png">
+
     <meta name="robots" content="index,follow">'
 
     <link href="/assets/img/favicon.ico" rel="shortcut icon">
-    
+
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet">
@@ -264,7 +264,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				</div>
 			</div>
 		</div>
-		{{ request()->path() }}
 	</div><!-- close #mainContainer -->
 </body>
 

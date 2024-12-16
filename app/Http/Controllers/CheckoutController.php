@@ -24,4 +24,12 @@ class CheckoutController extends Controller
 
         return redirect($session->url);
     }
+
+    public function cancel()
+    {
+        return view('checkout.cancel', [
+            'whatsapp_number' => '34722372858',
+            'whatsapp_message' => 'Hola, tengo una consulta sobre los planes'
+        ]);
+    }
 }
