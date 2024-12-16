@@ -135,76 +135,81 @@
                                 </div>
                                 <br>
 
+                                @php
+                                    $currencySymbols = [
+                                        'eur' => ['symbol' => '€', 'position' => 'after'],
+                                        'usd' => ['symbol' => '$', 'position' => 'before'],
+                                        'ars' => ['symbol' => '$', 'position' => 'before']
+                                    ];
+                                    $configuredCurrency = config('services.stripe.currency', 'eur');
+                                @endphp
+
                                 @foreach ($plans_item->sortBy('unit_amount') as $plan)
-                                    @php
-                                        $currencySymbols = [
-                                            'eur' => ['symbol' => '€', 'position' => 'after'],
-                                            'usd' => ['symbol' => '$', 'position' => 'before'],
-                                            'ars' => ['symbol' => '$', 'position' => 'before']
-                                        ];
+                                    @if($plan->currency === $configuredCurrency)
+                                        @php
+                                            $amount = $plan->unit_amount / 100;
+                                            if ($plan->recurring->interval === 'year') {
+                                                $amount = $amount / 12;
+                                            } elseif ($plan->recurring->interval === 'quarter') {
+                                                $amount = $amount / 3;
+                                            } elseif ($plan->recurring->interval === 'semester') {
+                                                $amount = $amount / 6;
+                                            }
 
-                                        $amount = $plan->unit_amount / 100;
-                                        if ($plan->recurring->interval === 'year') {
-                                            $amount = $amount / 12;
-                                        } elseif ($plan->recurring->interval === 'quarter') {
-                                            $amount = $amount / 3;
-                                        } elseif ($plan->recurring->interval === 'semester') {
-                                            $amount = $amount / 6;
-                                        }
+                                            $currency = $currencySymbols[$plan->currency] ?? ['symbol' => $plan->currency, 'position' => 'after'];
+                                        @endphp
 
-                                        $currency = $currencySymbols[$plan->currency] ?? ['symbol' => $plan->currency, 'position' => 'after'];
-                                    @endphp
+                                        @if($plan->recurring->interval === 'month')
+                                            <p class="price" style="font-size: 1.4em;">
+                                                <span class="tc-{{ $product->metadata->color ?? 'red' }}-5" style="text-decoration: line-through;">
+                                                    <strong>
+                                                        @if($currency['position'] === 'before')
+                                                            {{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
+                                                        @else
+                                                            {{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
+                                                        @endif
+                                                    </strong>
+                                                </span>
+                                                <span class="iva">
+                                                    <small>
+                                                        <em>+ I.V.A. por mes</em>
+                                                    </small>
+                                                </span>
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('form-monthly-{{ $plan->id }}').submit();"
+                                                   style="font-size: 0.5em; text-decoration: none; color: #666; margin-top: 5px; display: inline-block; font-style: italic;">
+                                                    Contratar mensualmente »
+                                                </a>
+                                                <form id="form-monthly-{{ $plan->id }}" action="/create-checkout-session" method="POST" style="display: none;">
+                                                    @csrf
+                                                    <input type="hidden" name="price_id" value="{{ $plan->id }}">
+                                                </form>
+                                            </p>
+                                        @else
+                                            <p class="price">
+                                                <span class="tc-{{ $product->metadata->color ?? 'red' }}-5">
+                                                    <strong>
+                                                        @if($currency['position'] === 'before')
+                                                            {{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
+                                                        @else
+                                                            {{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
+                                                        @endif
+                                                    </strong>
+                                                </span>
+                                                <span class="iva">
+                                                    <small>
+                                                        <em>+ I.V.A. por mes con pago anual</em>
+                                                    </small>
+                                                </span>
+                                            </p>
 
-                                    @if($plan->recurring->interval === 'month')
-                                        <p class="price" style="font-size: 1.4em;">
-                                            <span class="tc-{{ $product->metadata->color ?? 'red' }}-5" style="text-decoration: line-through;">
-                                                <strong>
-                                                    @if($currency['position'] === 'before')
-                                                        {{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
-                                                    @else
-                                                        {{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
-                                                    @endif
-                                                </strong>
-                                            </span>
-                                            <span class="iva">
-                                                <small>
-                                                    <em>+ I.V.A. por mes</em>
-                                                </small>
-                                            </span>
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('form-monthly-{{ $plan->id }}').submit();"
-                                               style="font-size: 0.5em; text-decoration: none; color: #666; margin-top: 5px; display: inline-block; font-style: italic;">
-                                                Contratar mensualmente »
-                                            </a>
-                                            <form id="form-monthly-{{ $plan->id }}" action="/create-checkout-session" method="POST" style="display: none;">
+                                            <form action="/create-checkout-session" method="POST" style="display: inline;">
                                                 @csrf
                                                 <input type="hidden" name="price_id" value="{{ $plan->id }}">
+                                                <button type="submit" class="button button-medium margin-auto bc-red-4 margin-t-40">
+                                                    contratar
+                                                </button>
                                             </form>
-                                        </p>
-                                    @else
-                                        <p class="price">
-                                            <span class="tc-{{ $product->metadata->color ?? 'red' }}-5">
-                                                <strong>
-                                                    @if($currency['position'] === 'before')
-                                                        {{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
-                                                    @else
-                                                        {{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
-                                                    @endif
-                                                </strong>
-                                            </span>
-                                            <span class="iva">
-                                                <small>
-                                                    <em>+ I.V.A. por mes con pago anual</em>
-                                                </small>
-                                            </span>
-                                        </p>
-
-                                        <form action="/create-checkout-session" method="POST" style="display: inline;">
-                                            @csrf
-                                            <input type="hidden" name="price_id" value="{{ $plan->id }}">
-                                            <button type="submit" class="button button-medium margin-auto bc-red-4 margin-t-40">
-                                                contratar
-                                            </button>
-                                        </form>
+                                        @endif
                                     @endif
                                 @endforeach
                             </li>
