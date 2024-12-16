@@ -28,6 +28,7 @@ use App\Http\Controllers\Site\ContactenosController;
 use App\Http\Controllers\Cms\InvoiceController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Site\PriceListController;
+use App\Http\Controllers\Site\WordPressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,3 +227,5 @@ Route::get('/cancel', [CheckoutController::class, 'cancel'])->name('checkout.can
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 Route::get('/precios', [PriceListController::class, 'index'])->name('site.prices.index');
+
+Route::get('/wordpress', [WordPressController::class, 'index'])->name('site.wordpress');
