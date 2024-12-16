@@ -143,7 +143,15 @@
                                             'ars' => ['symbol' => '$', 'position' => 'before']
                                         ];
 
-                                        $amount = number_format($plan->unit_amount / 100, 2);
+                                        $amount = $plan->unit_amount / 100;
+                                        if ($plan->recurring->interval === 'year') {
+                                            $amount = $amount / 12;
+                                        } elseif ($plan->recurring->interval === 'quarter') {
+                                            $amount = $amount / 3;
+                                        } elseif ($plan->recurring->interval === 'semester') {
+                                            $amount = $amount / 6;
+                                        }
+
                                         $currency = $currencySymbols[$plan->currency] ?? ['symbol' => $plan->currency, 'position' => 'after'];
                                     @endphp
 
@@ -152,9 +160,9 @@
                                             <span class="tc-{{ $product->metadata->color ?? 'red' }}-5" style="text-decoration: line-through;">
                                                 <strong>
                                                     @if($currency['position'] === 'before')
-                                                        {{ $currency['symbol'] }}{{ $amount }}
+                                                        {{ $currency['symbol'] }}{{ number_format($amount, 2) }}
                                                     @else
-                                                        {{ $amount }}{{ $currency['symbol'] }}
+                                                        {{ number_format($amount, 2) }}{{ $currency['symbol'] }}
                                                     @endif
                                                 </strong>
                                             </span>
@@ -177,9 +185,9 @@
                                             <span class="tc-{{ $product->metadata->color ?? 'red' }}-5">
                                                 <strong>
                                                     @if($currency['position'] === 'before')
-                                                        {{ $currency['symbol'] }}{{ $amount }}
+                                                        {{ $currency['symbol'] }}{{ number_format($amount, 2) }}
                                                     @else
-                                                        {{ $amount }}{{ $currency['symbol'] }}
+                                                        {{ number_format($amount, 2) }}{{ $currency['symbol'] }}
                                                     @endif
                                                 </strong>
                                             </span>

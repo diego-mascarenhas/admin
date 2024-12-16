@@ -13,7 +13,7 @@ class StripeService
         Stripe::setApiKey(config('services.stripe.secret'));
     }
 
-    public function getPlans()
+    public function getPlans($type = 'hosting')
     {
         try {
             $prices = Price::all([
@@ -23,23 +23,16 @@ class StripeService
                 'limit' => 100
             ]);
 
-            // Filtrar solo los planes de hosting
-            $hostingPlans = collect($prices->data)->filter(function($price) {
+            $filteredPlans = collect($prices->data)->filter(function($price) use ($type) {
                 return isset($price->product->metadata->type)
-                    && $price->product->metadata->type === 'hosting';
+                    && $price->product->metadata->type === $type;
             });
 
-            Log::info('Planes de hosting recuperados:', [
-                'count' => $hostingPlans->count(),
-                'planes' => $hostingPlans
-            ]);
-
-            // Convertir de nuevo a objeto tipo Stripe
-            $prices->data = $hostingPlans->values()->all();
+            $prices->data = $filteredPlans->values()->all();
 
             return $prices;
         } catch (\Exception $e) {
-            Log::error('Error al obtener planes de Stripe: ' . $e->getMessage());
+            Log::error("Error al obtener planes de {$type} de Stripe: " . $e->getMessage());
             throw $e;
         }
     }
