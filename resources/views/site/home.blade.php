@@ -7,14 +7,16 @@
 		<h2>Soluciones de tecnología y conectividad para tu negocio en la Nube</h2>
 		<p class="margin-b-80">Más de <span class="tw-semibold">20 años</span> de experiencia nos avalan</p>
 	</div>
-	
+
 	<section class="container text-center">
 		<div class="home-principal">
 			<div class="hidden-xs">
 				<h2>Soluciones de tecnología y conectividad para tu negocio en la Nube</h2>
-				<p class="tc-red-4 margin-b-80">Más de <span class="tw-semibold">20 años</span> de experiencia nos avalan</p>
+				<p class="tc-red-4 margin-b-80">
+					Más de <span class="tw-semibold">{{ intval(abs(\Carbon\Carbon::now()->diffInYears(\Carbon\Carbon::create(2002, 3, 31)))) }} años</span> de experiencia nos avalan
+				</p>
 			</div>
-			
+
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col col-md-4 margin-b-90" style="background-image:url('assets/img/iconos/consultoria.png');">

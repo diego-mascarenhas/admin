@@ -68,59 +68,140 @@
     <div class="container-fluid">
         <div class="row">
             @php
-                $productosAgrupados = collect($planes)
+                $groupedItems = collect($planes)
                     ->groupBy(function($plan) {
                         return $plan->product->id;
                     })
-                    ->sortBy(function($planes_producto) {
-                        return $planes_producto->min('unit_amount');
+                    ->sortBy(function($plans_item) {
+                        return $plans_item->min('unit_amount');
                     });
             @endphp
 
-            @foreach ($productosAgrupados as $planes_producto)
+            @foreach ($groupedItems as $plans_item)
                 @php
-                    $producto = $planes_producto->first()->product;
+                    $product = $plans_item->first()->product;
                 @endphp
 
                 <div class="col col-md-4">
-                    <ul>
-                        <li class="bc-{{ $producto->metadata->color ?? 'red' }}-5">
-                            <h3>{{ $producto->name }}</h3>
-                        </li>
-                        <li>
-                            <p>{{ $producto->metadata->storage ?? '30' }} GB de espacio</p>
-                            <p>{{ $producto->metadata->transfer ?? '5' }} GB de transferencia mensual</p>
-                            <p>{{ $producto->metadata->emails ?? '1' }} Cuenta{{ $producto->metadata->emails > 1 ? 's' : '' }} de emails</p>
-                            <p>Panel de control cPanel</p>
-                            <p>Backups semanales</p>
-                            <p>Certificado SSL</p>
-                            <p>{{ $producto->metadata->credits ?? '500' }} créditos email-Marketing mensuales</p>
-
-                            @foreach ($planes_producto->sortBy('unit_amount') as $plan)
-                                <p class="price">
-                                    <span class="tc-{{ $producto->metadata->color ?? 'red' }}-5">
-                                        <strong>{{ number_format($plan->unit_amount / 100, 2) }}€</strong>
-                                    </span>
-                                    <span class="iva">
-                                        <small>
-                                            <em>+ I.V.A. por mes{{ isset($plan->metadata->billing_period) && $plan->metadata->billing_period === 'year' ? ' con pago anual' : '' }}</em>
-                                        </small>
-                                    </span>
-                                </p>
-
-                                @if(Route::currentRouteName() !== 'contratar.create')
-                                    <form action="/create-checkout-session" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="price_id" value="{{ $plan->id }}">
-                                        <button type="submit"
-                                                class="button button-medium margin-auto bc-{{ $producto->metadata->color ?? 'red' }}-4 margin-t-40">
-                                            contratar
-                                        </button>
-                                    </form>
+                    <div class="planCommon">
+                        <ul>
+                            <li class="bc-{{ $product->metadata->color ?? 'red' }}-5">
+                                <h3>{{ $product->metadata->name ?? $product->name }}</h3>
+                            </li>
+                            <li>
+                                <em>{{ $product->metadata->subtitle ?? '' }}</em><br><br>
+                                <strong>{{ $product->metadata->storage ?? '30' }} GB</strong> de espacio<br>
+                                @if($product->metadata->transfer === 'unlimited')
+                                    Transferencia mensual <strong>sin límites</strong><br>
+                                @else
+                                    {{ $product->metadata->transfer ?? '5' }} GB de transferencia mensual<br>
                                 @endif
-                            @endforeach
-                        </li>
-                    </ul>
+                                @if($product->metadata->emails === 'unlimited')
+                                    Cuentas de <strong>emails ilimitadas</strong><br>
+                                @elseif(isset($product->metadata->emails))
+                                    {{ $product->metadata->emails }} Cuenta{{ $product->metadata->emails > 1 ? 's' : '' }} de <strong>emails</strong><br>
+                                @else
+                                    <span style="text-decoration: line-through;">Cuentas de emails</span><br>
+                                @endif
+                                @if(isset($product->metadata->panel) && $product->metadata->panel)
+                                    Panel de control <strong>cPanel</strong><br>
+                                @else
+                                    <span style="text-decoration: line-through;">Panel de control</span><br>
+                                @endif
+                                Backups {{
+                                    isset($product->metadata->backups) ?
+                                        ($product->metadata->backups == 1 ? 'diarios' :
+                                         ($product->metadata->backups == 2 ? 'cada 48 hs' : 'semanales'))
+                                    : 'semanales'
+                                }}<br>
+                                @if(isset($product->metadata->domain) && $product->metadata->domain)
+                                    <strong>Dominio</strong> gratis por un año<br>
+                                @else
+                                    <span style="text-decoration: line-through;">Dominio gratis por un año</span><br>
+                                @endif
+                                Certificado <strong>SSL</strong><br>
+                                @if(isset($product->metadata->plugins) && $product->metadata->plugins)
+                                    Actualización de <strong>Plugins</strong><br>
+                                @endif
+                                @if(isset($product->metadata->monitoring) && $product->metadata->monitoring)
+                                    Monitoreo de <strong>vulnerabilidades</strong><br>
+                                @endif
+                                @if(isset($product->metadata->seo) && $product->metadata->seo)
+                                    Alta en Buscadores <strong>(SEO)</strong><br>
+                                @endif
+                                <br>
+                                <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
+                                    <small>{{ $product->metadata->description }}</small>
+                                </div>
+                                <br>
+
+                                @foreach ($plans_item->sortBy('unit_amount') as $plan)
+                                    @php
+                                        $currencySymbols = [
+                                            'eur' => ['symbol' => '€', 'position' => 'after'],
+                                            'usd' => ['symbol' => '$', 'position' => 'before'],
+                                            'ars' => ['symbol' => '$', 'position' => 'before']
+                                        ];
+
+                                        $amount = number_format($plan->unit_amount / 100, 2);
+                                        $currency = $currencySymbols[$plan->currency] ?? ['symbol' => $plan->currency, 'position' => 'after'];
+                                    @endphp
+
+                                    @if($plan->recurring->interval === 'month')
+                                        <p class="price" style="font-size: 1.4em;">
+                                            <span class="tc-{{ $product->metadata->color ?? 'red' }}-5" style="text-decoration: line-through;">
+                                                <strong>
+                                                    @if($currency['position'] === 'before')
+                                                        {{ $currency['symbol'] }}{{ $amount }}
+                                                    @else
+                                                        {{ $amount }}{{ $currency['symbol'] }}
+                                                    @endif
+                                                </strong>
+                                            </span>
+                                            <span class="iva">
+                                                <small>
+                                                    <em>+ I.V.A. por mes</em>
+                                                </small>
+                                            </span>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('form-monthly-{{ $plan->id }}').submit();"
+                                               style="font-size: 0.5em; text-decoration: none; color: #666; margin-top: 5px; display: inline-block; font-style: italic;">
+                                                Contratar mensualmente »
+                                            </a>
+                                            <form id="form-monthly-{{ $plan->id }}" action="/create-checkout-session" method="POST" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="price_id" value="{{ $plan->id }}">
+                                            </form>
+                                        </p>
+                                    @else
+                                        <p class="price">
+                                            <span class="tc-{{ $product->metadata->color ?? 'red' }}-5">
+                                                <strong>
+                                                    @if($currency['position'] === 'before')
+                                                        {{ $currency['symbol'] }}{{ $amount }}
+                                                    @else
+                                                        {{ $amount }}{{ $currency['symbol'] }}
+                                                    @endif
+                                                </strong>
+                                            </span>
+                                            <span class="iva">
+                                                <small>
+                                                    <em>+ I.V.A. por mes con pago anual</em>
+                                                </small>
+                                            </span>
+                                        </p>
+
+                                        <form action="/create-checkout-session" method="POST" style="display: inline;">
+                                            @csrf
+                                            <input type="hidden" name="price_id" value="{{ $plan->id }}">
+                                            <button type="submit" class="button button-medium margin-auto bc-red-4 margin-t-40">
+                                                contratar
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endforeach
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             @endforeach
         </div>
