@@ -36,13 +36,13 @@ class ContactenosController extends Controller
         $email = new ContactenosEnvio($nombre, $empresa, $email, $telefono, $mensaje);
 
         try {
-            Mail::to('formularios@admin.revisionalpha.es')->send($email);
-        
+            Mail::to('info@revisionalpha.es')->send($email);
+
             session()->flash('success', '¡El correo se ha enviado con éxito!');
         } catch (\Exception $e) {
             session()->flash('error', 'Hubo un error al enviar el correo: ' . $e->getMessage());
         }
-    
+
         return redirect()->back();
     }
 }
