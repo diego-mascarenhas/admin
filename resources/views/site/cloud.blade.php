@@ -104,9 +104,9 @@
 											<span class="tc-{{ $product->metadata->color ?? 'red' }}-5" style="text-decoration: line-through;">
 												<strong>
 													@if($currency['position'] === 'before')
-														{{ $currency['symbol'] }}{{ number_format($amount, 2) }}
+														{{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
 													@else
-														{{ number_format($amount, 2) }}{{ $currency['symbol'] }}
+														{{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
 													@endif
 												</strong>
 											</span>
@@ -129,9 +129,9 @@
 											<span class="tc-{{ $product->metadata->color ?? 'red' }}-5">
 												<strong>
 													@if($currency['position'] === 'before')
-														{{ $currency['symbol'] }}{{ number_format($amount, 2) }}
+														{{ $currency['symbol'] }}{{ str_replace('.', ',', number_format($amount, 2)) }}
 													@else
-														{{ number_format($amount, 2) }}{{ $currency['symbol'] }}
+														{{ str_replace('.', ',', number_format($amount, 2)) }}{{ $currency['symbol'] }}
 													@endif
 												</strong>
 											</span>
